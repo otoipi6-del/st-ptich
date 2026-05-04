@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правление и штат — СТ ПТИЧЬ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .staff-card {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid #2d7a3e;
+            transition: var(--transition);
+        }
+        .staff-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+        .staff-card h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e5a2a;
+            margin-bottom: 8px;
+        }
+        .staff-card .role {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: var(--white);
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+        }
+        .staff-card p {
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: var(--gray-700);
+        }
+        .staff-card .phone {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .staff-card .phone:hover {
+            text-decoration: underline;
+        }
+        .viber-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #7360f2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+        .viber-link:hover {
+            text-decoration: underline;
+        }
+        .member-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 8px;
+        }
+        .member-list li {
+            padding: 3px 0;
+            border-bottom: none;
+            font-size: 16px;
+            color: var(--gray-700);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1.3;
+        }
+        .member-list li::before {
+            content: '🔸';
+            font-size: 10px;
+        }
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent));
+            border-radius: 2px;
+            margin: 50px 0;
+        }
+        .staff-divider {
+            border: none;
+            border-top: 1px solid var(--gray-100);
+            margin: 16px 0;
+        }
+    </style>
+
+        <style>
+            .footer-col-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px 24px;
+            }
+            .footer-col-links a {
+                display: inline !important;
+                white-space: nowrap;
+            }
+        </style>
+    
+<style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+            .donate-box {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-top: 16px;
+            border-left: 3px solid var(--accent);
+        }
+        .donate-box p {
+            font-size: 13px !important;
+            color: var(--gray-600) !important;
+            line-height: 1.5 !important;
+            margin-bottom: 12px !important;
+        }
+        .btn-donate {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-donate:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+</style>
+</head>
+<body>
+    <!-- Search Bar -->
+</div>
+
+    <!-- Breadcrumbs -->
+    </div>
+
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="sluzhby.html">Службы</a></li>
+                    <li><a href="pravlenie.html" class="active">Правление</a></li>
+                    <li><a href="dokumenty.html">Документы</a></li>
+                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>Правление и штат СТ ПТИЧЬ</h1>
+            <p>Контакты председателя, бухгалтера и членов правления</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="max-width: 900px; margin: 0 auto;">
+
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>Штат СТ ПТИЧЬ</h2>
+            </div>
+
+            <!-- Chairman -->
+            <div class="staff-card">
+                <h4>Египко Дмитрий Вячеславович</h4>
+                <span class="role">Председатель</span>
+                <p><a href="tel:+375296428604" class="phone">📞 +375 (29) 642-86-04</a></p>
+                <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать Председателю в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
+            </div>
+            </div>
+
+            <hr class="staff-divider">
+
+            <!-- Accountant -->
+            <div class="staff-card">
+                <h4>Дмитриева Юлия Игоревна</h4>
+                <span class="role">Бухгалтер</span>
+                <p><a href="tel:+375297658773" class="phone">📞 +375 (29) 765-87-73</a></p>
+                <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать бухгалтеру в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
+            </div>
+            </div>
+
+            <hr class="staff-divider">
+
+            <!-- Electrician -->
+            <div class="staff-card">
+                <h4>Босяков Анатолий Андреевич</h4>
+                <span class="role">Электрик</span>
+                <p><a href="tel:+375296959737" class="phone">📞 +375 (29) 695-97-37</a></p>
+                <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать электрику в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
+            </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Board Members -->
+            <div class="info-block">
+                <h3>Правление СТ ПТИЧЬ</h3>
+                <ul class="member-list">
+                    <li>Степанович Виталий Павлович</li>
+                    <li>Ходаненок В.</li>
+                    <li>Клютченя Александр Григорьевич</li>
+                    <li>Пилипук В.</li>
+                    <li>Семячко Сергей Игоревич</li>
+                </ul>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Site Admin -->
+            <div class="staff-card">
+                <h4>Глинистый Станислав Михайлович</h4>
+                <span class="role">Администратор сайта</span>
+                <p><a href="tel:+375296463715" class="phone">📞 +375 (29) 646-37-15</a></p>
+                <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать администратору сайта в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <a href="https://pay.raschet.by/#00020132370010by.raschet0107432515110083372096653039335802BY6304B009" class="btn-donate" target="_blank">💳 Перевести деньги</a>
+            </div>
+            </div>
+
+        </div>
+    </section>
+
+            <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О Товариществе</a>
+                <a href="tarify.html">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="sluzhby.html">Службы</a>
+                <a href="pravlenie.html" class="active">Правление</a>
+                <a href="dokumenty.html">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+</script>
+
+    <script>
+        // Highlight active footer link
+        (function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const footerLinks = document.querySelectorAll('.footer-col a');
+            footerLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

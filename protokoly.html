@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Протоколы общих собраний — СТ ПТИЧЬ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .doc-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .doc-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .doc-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+            color: white;
+        }
+        .doc-info {
+            flex: 1;
+        }
+        .doc-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .doc-info .doc-date {
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .doc-info p {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .doc-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .doc-actions a, .doc-actions button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-view {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-view:hover {
+            background: var(--primary-dark);
+        }
+        .btn-download {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+        }
+        .btn-download:hover {
+            background: var(--gray-300);
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: 700px;
+            border: none;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            margin-top: 20px;
+        }
+        .pdf-section {
+            display: none;
+            margin-top: 30px;
+            animation: fadeIn 0.3s ease;
+        }
+        .pdf-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .pdf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .pdf-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .btn-close {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-close:hover {
+            background: var(--gray-300);
+        }
+        .year-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 32px 0 20px;
+        }
+        .year-divider::before {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+        .year-divider h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gray-800);
+            white-space: nowrap;
+        }
+        .year-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gray-200);
+        }
+        @media (max-width: 768px) {
+            .doc-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .pdf-viewer {
+                height: 400px;
+            }
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+        <style>
+            .footer-col-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px 24px;
+            }
+            .footer-col-links a {
+                display: inline !important;
+                white-space: nowrap;
+            }
+            .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+<style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Search Bar -->
+</div>
+
+    <!-- Breadcrumbs -->
+    </div>
+
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="sluzhby.html">Службы</a></li>
+                    <li><a href="pravlenie.html">Правление</a></li>
+                    <li><a href="dokumenty.html" class="active">Документы</a></li>
+                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>Протоколы общих собраний</h1>
+            <p>Архив протоколов собраний членов СТ «Птичь»</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="max-width: 900px; margin: 0 auto;">
+
+            <!-- PDF Viewer Section (динамический) -->
+            <div class="pdf-section" id="pdfSection">
+                <div class="pdf-header">
+                    <h3 id="pdfTitle">📄 Просмотр документа</h3>
+                    <button class="btn-close" onclick="hidePdf()">✕ Закрыть просмотр</button>
+                </div>
+                <embed class="pdf-viewer" id="pdfViewer" src="" type="application/pdf">
+                <p style="text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray-500);">
+                    Если документ не отображается, <a id="pdfDownloadLink" href="#" download style="color: var(--primary);">скачайте PDF</a> или откройте в отдельной вкладке.
+                </p>
+            </div>
+
+            <!-- 2016 -->
+            <div class="year-divider"><h2>2016 год</h2></div>
+            
+            <div class="doc-card">
+                <div class="doc-icon">📋</div>
+                <div class="doc-info">
+                    <h3>Протокол № 1 общего собрания</h3>
+                    <span class="doc-date">21 мая 2016 г. · 65 членов товарищества · г. Минск</span>
+                    <p>Повестка: прокладка оптоволоконного кабеля Белтелеком, установка электронных счётчиков, повышение членских взносов до 350 000 руб., плата за повторное подключение, пересмотр зарплаты, поощрение Египко Д.В., изменения в ревизионной комиссии.</p>
+                    <div class="doc-actions">
+                        <button class="btn-view" onclick="showPdf('documents/protokol-2016.pdf', 'Протокол № 1 общего собрания — 21 мая 2016 г.')">👁️ Просмотреть</button>
+                        <a href="documents/protokol-2016.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2015 -->
+            <div class="year-divider"><h2>2015 год</h2></div>
+
+            <div class="doc-card">
+                <div class="doc-icon">📋</div>
+                <div class="doc-info">
+                    <h3>Протокол № 1 общего собрания</h3>
+                    <span class="doc-date">2 мая 2015 г. · 68 членов товарищества · г. Минск</span>
+                    <p>Повестка: сбор средств на новое КТП и замену электросетей, отключение неплательщиков, вынос счётчиков на улицу, штрафы за воровство электроэнергии, повышение членских взносов до 300 000 руб.</p>
+                    <div class="doc-actions">
+                        <button class="btn-view" onclick="showPdf('documents/protokol-2015.pdf', 'Протокол № 1 общего собрания — 2 мая 2015 г.')">👁️ Просмотреть</button>
+                        <a href="documents/protokol-2015.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2013 -->
+            <div class="year-divider"><h2>2013 год</h2></div>
+
+            <div class="doc-card">
+                <div class="doc-icon">📋</div>
+                <div class="doc-info">
+                    <h3>Протокол № 1 общего собрания</h3>
+                    <span class="doc-date">8 сентября 2013 г. · 65 членов товарищества · г. Минск</span>
+                    <p>Повестка: повышение членских взносов до 200 000 руб. за квартал, утепление колонки водоснабжения, увеличение зарплаты электрику, бухгалтеру и сторожу, рассмотрение заявления Матвеева С.Г., меры к неплательщикам.</p>
+                    <div class="doc-actions">
+                        <button class="btn-view" onclick="showPdf('documents/protokol-2013.pdf', 'Протокол № 1 общего собрания — 8 сентября 2013 г.')">👁️ Просмотреть</button>
+                        <a href="documents/protokol-2013.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2012 -->
+            <div class="year-divider"><h2>2012 год</h2></div>
+
+            <div class="doc-card">
+                <div class="doc-icon">📋</div>
+                <div class="doc-info">
+                    <h3>Протокол № 1 общего собрания</h3>
+                    <span class="doc-date">30 сентября 2012 г. · 85 членов товарищества · г. Минск</span>
+                    <p>Повестка: сроки уплаты членских взносов, меры к неплательщикам, оцифровка земельных участков, ремонт электротрансформатора, утверждение состава правления, переизбрание председателя (Захаров Э.Э.).</p>
+                    <div class="doc-actions">
+                        <button class="btn-view" onclick="showPdf('documents/protokol-2012.pdf', 'Протокол № 1 общего собрания — 30 сентября 2012 г.')">👁️ Просмотреть</button>
+                        <a href="documents/protokol-2012.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2011 -->
+            <div class="year-divider"><h2>2011 год</h2></div>
+
+            <div class="doc-card">
+                <div class="doc-icon">📋</div>
+                <div class="doc-info">
+                    <h3>Протокол № 1 собрания застройщиков газопровода</h3>
+                    <span class="doc-date">31 июля 2011 г. · г. Минск</span>
+                    <p>Повестка: ход застройки газопровода, утверждение целевых взносов (6 000 000 руб.), порядок подключения новых потребителей, оплата казначею, выдача ТУ на проектирование, передача газопровода на баланс УП «Мингаз».</p>
+                    <div class="doc-actions">
+                        <button class="btn-view" onclick="showPdf('documents/protokol-gazoprovod-2011.pdf', 'Протокол собрания застройщиков газопровода — 31 июля 2011 г.')">👁️ Просмотреть</button>
+                        <a href="documents/protokol-gazoprovod-2011.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="dokumenty.html" class="back-link">← Вернуться к Документы</a>
+            </div>
+        </div>
+    </section>
+
+            <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О Товариществе</a>
+                <a href="tarify.html">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="sluzhby.html">Службы</a>
+                <a href="pravlenie.html">Правление</a>
+                <a href="dokumenty.html" class="active">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showPdf(src, title) {
+            document.getElementById('pdfViewer').src = src;
+            document.getElementById('pdfTitle').textContent = '📄 ' + title;
+            document.getElementById('pdfDownloadLink').href = src;
+            document.getElementById('pdfSection').classList.add('active');
+            document.getElementById('pdfSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        function hidePdf() {
+            document.getElementById('pdfSection').classList.remove('active');
+            document.getElementById('pdfViewer').src = '';
+        }
+else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            const dividers = document.querySelectorAll('.year-divider');
+            dividers.forEach(divider => {
+                let next = divider.nextElementSibling;
+                let hasVisible = false;
+                while (next && !next.classList.contains('year-divider')) {
+                    if (next.classList.contains('doc-card') && next.style.display !== 'none') {
+                        hasVisible = true;
+                    }
+                    next = next.nextElementSibling;
+                }
+                divider.style.display = hasVisible ? 'flex' : 'none';
+            });
+            
+            if (!found) {
+                alert('По запросу "' + query + '" ничего не найдено.');
+                cards.forEach(c => c.style.display = 'flex');
+                dividers.forEach(d => d.style.display = 'flex');
+            }
+        }
+</script>
+
+    <script>
+        (function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const footerLinks = document.querySelectorAll('.footer-col a');
+            footerLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

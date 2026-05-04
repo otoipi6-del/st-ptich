@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аварийные и другие службы — СТ ПТИЧЬ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .emergency-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .emergency-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+        .emergency-card.urgent {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+        }
+        .emergency-card.urgent h4 {
+            color: #dc3545;
+        }
+        .emergency-card.gov {
+            border-left-color: #1a5276;
+            background: linear-gradient(135deg, #f0f7ff, #d6e8ff);
+        }
+        .emergency-card.gov h4 {
+            color: #1a5276;
+        }
+        .emergency-card.st {
+            border-left-color: #2d7a3e;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        }
+        .emergency-card.st h4 {
+            color: #1e5a2a;
+        }
+        .emergency-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .emergency-card .phone {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 8px;
+            display: block;
+            text-decoration: none;
+        }
+        .emergency-card .phone:hover {
+            color: var(--primary);
+        }
+        .emergency-card .address {
+            font-size: 14px;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        .emergency-card .role {
+            display: inline-block;
+            background: rgba(255,255,255,0.6);
+            color: var(--gray-700);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent));
+            border-radius: 2px;
+            margin: 50px 0;
+        }
+    </style>
+
+        <style>
+            .footer-col-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px 24px;
+            }
+            .footer-col-links a {
+                display: inline !important;
+                white-space: nowrap;
+            }
+        </style>
+    
+<style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+    </style>
+</head>
+<body>
+    <!-- Search Bar -->
+</div>
+
+    <!-- Breadcrumbs -->
+    </div>
+
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="sluzhby.html" class="active">Службы</a></li>
+                    <li><a href="pravlenie.html">Правление</a></li>
+                    <li><a href="dokumenty.html">Документы</a></li>
+                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>Аварийные и другие службы</h1>
+            <p>Важные телефоны для экстренных случаев и контакты организаций</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="max-width: 1100px; margin: 0 auto;">
+
+            <!-- Emergency Services -->
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>🚨 Экстренные службы</h2>
+                <p>Звоните в случае опасности для жизни и здоровья</p>
+            </div>
+            <div class="emergency-grid">
+                <div class="emergency-card urgent">
+                    <h4>🚨 Единый номер экстренных служб</h4>
+                    <a href="tel:112" class="phone">112</a>
+                    <p class="address">Пожар, милиция, скорая помощь</p>
+                </div>
+                <div class="emergency-card urgent">
+                    <h4>🚑 Скорая медицинская помощь</h4>
+                    <a href="tel:103" class="phone">103</a>
+                    <p class="address">Неотложная медицинская помощь</p>
+                </div>
+                <div class="emergency-card urgent">
+                    <h4>🔥 МЧС</h4>
+                    <a href="tel:101" class="phone">101</a>
+                    <p class="address">Пожар, загорание, спасение</p>
+                </div>
+                <div class="emergency-card urgent">
+                    <h4>👮 Милиция</h4>
+                    <a href="tel:102" class="phone">102</a>
+                    <p class="address">Преступление, правонарушение, кража</p>
+                </div>
+                <div class="emergency-card urgent">
+                    <h4>⛽ Мингаз</h4>
+                    <a href="tel:104" class="phone">104</a>
+                    <p class="address">Утечка газа, аварии на газопроводе</p>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- ST Services -->
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>🛠️ Службы товарищества</h2>
+                <p>Контакты для решения бытовых вопросов</p>
+            </div>
+            <div class="emergency-grid">
+                <div class="emergency-card st">
+                    <h4>⚡ Электрик</h4>
+                    <a href="tel:+375296959737" class="phone">+375 (29) 695-97-37</a>
+                    <p class="address">Босяков Анатолий Андреевич</p>
+                    <p class="address">Аварии с электроснабжением</p>
+                </div>
+                <div class="emergency-card st">
+                    <h4>💧 Водоснабжение</h4>
+                    <a href="tel:+375296428604" class="phone">+375 (29) 642-86-04</a>
+                    <p class="address">Египко Дмитрий Вячеславович</p>
+                    <p class="address">Проблемы с водой, прорывы</p>
+                </div>
+                <div class="emergency-card st">
+                    <h4>🚪 Председатель</h4>
+                    <a href="tel:+375296428604" class="phone">+375 (29) 642-86-04</a>
+                    <p class="address">Египко Дмитрий Вячеславович</p>
+                    <p class="address">Общие вопросы по товариществу</p>
+                </div>
+                <div class="emergency-card st">
+                    <h4>🛠️ Бухгалтер</h4>
+                    <a href="tel:+375297658773" class="phone">+375 (29) 765-87-73</a>
+                    <p class="address">Дмитриева Юлия Игоревна</p>
+                    <p class="address">Вопросы оплаты, взносов, документов</p>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Government & Utility Services -->
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>🏛️ Организации и учреждения</h2>
+                <p>Контакты районных служб и госорганов</p>
+            </div>
+            <div class="emergency-grid">
+                <div class="emergency-card gov">
+                    <h4>⚡ Энергосети Минского района</h4>
+                    <a href="tel:+375175045332" class="phone">+375 (17) 504-53-32</a>
+                    <p class="address">Электроснабжение района, аварийные отключения</p>
+                </div>
+                <div class="emergency-card gov">
+                    <h4>🏘️ Щомыслицкий сельсовет</h4>
+                    <span class="role">Председатель</span>
+                    <a href="tel:+375175093149" class="phone">+375 (17) 509-31-49</a>
+                    <p class="address">223049, Минский район, аг. Щомыслица, ул. Жуковского, 44</p>
+                </div>
+                <div class="emergency-card gov">
+                    <h4>🏛️ Минский райисполком</h4>
+                    <span class="role">Приёмная</span>
+                    <a href="tel:+375172705024" class="phone">+375 (17) 270-50-24</a>
+                    <p class="address">220073, г. Минск, ул. Ольшевского, 8</p>
+                </div>
+                <div class="emergency-card gov">
+                    <h4>📋 ИМНС по Минскому району</h4>
+                    <a href="tel:+375173592019" class="phone">+375 (17) 359-20-19</a>
+                    <p class="address">220140, г. Минск, ул. Притыцкого, д. 90</p>
+                    <p class="address">Налоговая инспекция, вопросы налогообложения</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+            <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О Товариществе</a>
+                <a href="tarify.html">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="sluzhby.html" class="active">Службы</a>
+                <a href="pravlenie.html">Правление</a>
+                <a href="dokumenty.html">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+</script>
+
+    <script>
+        // Highlight active footer link
+        (function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const footerLinks = document.querySelectorAll('.footer-col a');
+            footerLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

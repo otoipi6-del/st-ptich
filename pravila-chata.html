@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила чата СТ ПТИЧЬ — СТ ПТИЧЬ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .rules-box {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .rules-box h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--gray-100);
+        }
+        .rules-box h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 24px 0 12px 0;
+        }
+        .rules-box ul, .rules-box ol {
+            margin-left: 20px;
+            color: var(--gray-700);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        .rules-box ul li, .rules-box ol li {
+            margin-bottom: 8px;
+        }
+        .rules-box .allowed {
+            background: linear-gradient(135deg, #f0f9f2, #e0f2e4);
+            border-left: 4px solid #2d7a3e;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .rules-box .allowed h4 {
+            color: #2d7a3e;
+            margin-top: 0;
+        }
+        .rules-box .forbidden {
+            background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+            border-left: 4px solid #dc3545;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .rules-box .forbidden h4 {
+            color: #dc3545;
+            margin-top: 0;
+        }
+        .rules-box .other {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border-left: 4px solid #d97706;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .rules-box .other h4 {
+            color: #d97706;
+            margin-top: 0;
+        }
+        .rules-box .notice {
+            background: var(--gray-100);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--gray-700);
+        }
+        .rules-box .notice strong {
+            color: var(--gray-900);
+        }
+        .rules-box img {
+            max-width: 300px;
+            width: 100%;
+            border-radius: var(--radius-sm);
+            margin: 20px auto;
+            display: block;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .emoji {
+            font-size: 18px;
+            margin-right: 4px;
+        }
+    </style>
+    <style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="sluzhby.html">Службы</a></li>
+                    <li><a href="pravlenie.html">Правление</a></li>
+                    <li><a href="dokumenty.html">Документы</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>Правила чата СТ ПТИЧЬ</h1>
+            <p>Правила поведения в групповом чате членов товарищества</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="rules-box">
+
+            <div class="allowed">
+                <h4><span class="emoji">✅</span> Разрешено:</h4>
+                <ul>
+                    <li><span class="emoji">🔹</span> размещать информацию;</li>
+                    <li><span class="emoji">🔹</span> обсуждать текущие вопросы, проблемы и предложения СТ ПТИЧЬ;</li>
+                    <li><span class="emoji">🔹</span> взаимопомощь и общение.</li>
+                </ul>
+            </div>
+
+            <div class="forbidden">
+                <h4><span class="emoji">🚫</span> Запрещено:</h4>
+                <ol>
+                    <li>Нарушение действующего законодательства РБ.</li>
+                    <li>Оскорблять других участников чата и переходить на личности.</li>
+                    <li>Оставлять оскорбительные или порочащие высказывания в адрес третьих сторон (людей, организаций).</li>
+                    <li>Выдавать за факты (в том числе в качестве аргументов) непроверенные или заведомо неверные сведения.</li>
+                    <li>Размещать <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B9_%D1%8D%D1%82%D0%B8%D0%BA%D0%B5%D1%82#%D0%A1%D0%BF%D0%B0%D0%BC" target="_blank" style="color: var(--primary);">спам</a>, <a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D1%82%D0%B5%D0%B2%D0%BE%D0%B9_%D1%8D%D1%82%D0%B8%D0%BA%D0%B5%D1%82#%D0%A4%D0%BB%D1%83%D0%B4" target="_blank" style="color: var(--primary);">флуд</a> и рекламу.</li>
+                </ol>
+            </div>
+
+            <div class="other">
+                <h4><span class="emoji">⏰</span> Другое:</h4>
+                <p>Чат «засыпает» в <strong>22:00</strong> и «просыпается» в <strong>8 утра</strong>, плюс-минус.</p>
+            </div>
+
+            <div class="notice">
+                <p><strong>Сообщения, не соответствующие Правилам чата удаляются, а участники группы, написавшие их, получают предупреждение. За повторное нарушение — удаление из группы.</strong></p>
+                <p style="margin-top: 10px;"><strong>Участники группы, не прошедшие верификацию, удаляются из группы.</strong></p>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--gray-100); margin: 24px 0;">
+
+            <p style="text-align: center; font-size: 15px; color: var(--gray-600);">
+                Если Вы не уверены, что говорите то, что нужно и так, как нужно — ознакомьтесь с 
+                <a href="aforizmy.html" style="color: var(--primary); font-weight: 600;">Афоризмами об ораторском искусстве</a> 👈
+            </p>
+
+        </div>
+        <img src="images/zhivite-druzhno.jpg" alt="Ребята, давайте жить дружно" style="max-width: 280px; width: 100%; border-radius: var(--radius-md); margin: 24px auto 0; display: block; box-shadow: var(--shadow-sm);">
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="dokumenty.html" class="back-link">← Вернуться к Документы</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О Товариществе</a>
+                <a href="tarify.html">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="sluzhby.html">Службы</a>
+                <a href="pravlenie.html">Правление</a>
+                <a href="dokumenty.html" class="active">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const footerLinks = document.querySelectorAll('.footer-col a');
+            footerLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

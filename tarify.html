@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тарифы, платежи, реквизиты — СТ ПТИЧЬ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .price-highlight {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 16px 0;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .warning-box strong {
+            color: #856404;
+        }
+        .danger-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .danger-box strong {
+            color: #721c24;
+        }
+        .erip-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            margin-top: 24px;
+            border: 2px solid var(--primary-light);
+        }
+        .erip-box h4 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+        .erip-path {
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            border-left: 3px solid var(--accent);
+        }
+        .erip-path p {
+            margin: 6px 0;
+            font-size: 15px;
+            color: var(--gray-700);
+        }
+        .erip-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .erip-service {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .erip-fields {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-top: 16px;
+        }
+        .erip-fields p {
+            margin: 8px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .erip-fields p::before {
+            content: '🔸';
+        }
+        .date-badge {
+            display: inline-block;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent));
+            border-radius: 2px;
+            margin: 40px 0;
+        }
+    </style>
+
+        <style>
+            .footer-col-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px 24px;
+            }
+            .footer-col-links a {
+                display: inline !important;
+                white-space: nowrap;
+            }
+        </style>
+    
+<style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+    </style>
+</head>
+<body>
+    <!-- Search Bar -->
+</div>
+
+    <!-- Breadcrumbs -->
+    </div>
+
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html" class="active">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="sluzhby.html">Службы</a></li>
+                    <li><a href="pravlenie.html">Правление</a></li>
+                    <li><a href="dokumenty.html">Документы</a></li>
+                    </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>Тарифы, платежи, реквизиты</h1>
+            <p>Информация о членских взносах, тарифах на электроэнергию и способах оплаты</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="max-width: 900px; margin: 0 auto;">
+
+            <!-- Электроэнергия -->
+            <div class="info-block" style="margin-bottom: 30px;">
+                <h3>⚡ Тариф на электроэнергию</h3>
+                <span class="date-badge">с 01.04.2026</span>
+
+                <div class="price-highlight">
+                    1 кВт/час = 0,3341 рубля
+                </div>
+
+                <div class="danger-box">
+                    <strong>Важно:</strong> Срок оплаты за электроэнергию — <strong>ежемесячно</strong>, не позднее последнего дня текущего месяца.
+                </div>
+
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
+                    <a href="#" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">👉 Оплаченные показания</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdc3JPV9T5MK_qD9qkWNF3yvFhs_y5atbeVfWmugTry6OkiRg/viewform" target="_blank" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px;">👉 Ввод показаний электросчётчика</a>
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Членские взносы -->
+            <div class="info-block" style="margin-bottom: 30px;">
+                <h3>💰 Членские взносы</h3>
+                <span class="date-badge">с 01.07.2024</span>
+
+                <div class="price-highlight">
+                    70 рублей в квартал
+                </div>
+
+                <div class="warning-box" style="color: #856404;">
+                    <strong>Льготы:</strong> Для пенсионеров — <strong>65 рублей в квартал</strong> (при условии поданного заявления)
+                </div>
+
+                <div class="danger-box">
+                    <strong>Важно:</strong> Срок оплаты взносов — <strong>ежеквартально</strong>, не позднее последнего дня текущего квартала.
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- ЕРИП -->
+            <div class="erip-box">
+                <h4>🏦 Платежи через ЕРИП</h4>
+
+                <div class="erip-path">
+                    <p><strong>Путь в меню ЕРИП:</strong></p>
+                    <p>Коммунальные платежи →</p>
+                    <p>Садоводческие товарищества →</p>
+                    <p>Минская обл. →</p>
+                    <p>Минский р-н →</p>
+                    <p><strong>Птичь д. Заболотье</strong></p>
+                </div>
+
+                <p style="font-size: 16px; font-weight: 600; color: var(--gray-700); margin-bottom: 12px;">Выбирайте одну из услуг:</p>
+
+                <div class="erip-services">
+                    <span class="erip-service">Членские взносы</span>
+                    <span class="erip-service">Электроэнергия (код: 4715771)</span>
+                    <span class="erip-service">Целевые взносы</span>
+                </div>
+
+                <div class="erip-fields">
+                    <p style="font-weight: 600;">Вводите данные:</p>
+                    <p>Номер участка</p>
+                    <p>ФИО</p>
+                    <p>Сумма</p>
+                    <p>Нажмите «Оплатить»</p>
+                </div>
+
+                <div class="danger-box" style="margin-top: 20px;">
+                    <strong>Очень внимательно</strong> вносите номер участка, за который платите.
+                </div>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Реквизиты -->
+            <div class="info-block" style="margin-bottom: 30px;">
+                <h3>🏦 Реквизиты СТ ПТИЧЬ</h3>
+
+                <div style="background: var(--white); padding: 24px; border-radius: var(--radius-sm); border: 2px solid var(--primary-light);">
+                    <p style="margin-bottom: 12px;"><strong>Получатель:</strong> Садоводческое товарищество "Птичь", д. Заболотье</p>
+                    <p style="margin-bottom: 12px;"><strong>Банк:</strong> ОАО "Белинвестбанк"</p>
+                    <p style="margin-bottom: 12px;"><strong>IBAN:</strong> <span style="font-family: monospace; font-size: 16px; background: var(--gray-100); padding: 4px 8px; border-radius: 4px;">BY56BLBB30150600210928001001</span></p>
+                    <p style="margin-bottom: 12px;"><strong>BIC:</strong> <span style="font-family: monospace; font-size: 16px; background: var(--gray-100); padding: 4px 8px; border-radius: 4px;">BLBBBY2X</span></p>
+                    <p style="margin-bottom: 0;"><strong>УНП:</strong> <span style="font-family: monospace; font-size: 16px; background: var(--gray-100); padding: 4px 8px; border-radius: 4px;">600210928</span></p>
+                </div>
+
+                <div class="warning-box" style="color: #856404; margin-top: 20px;">
+                    <strong>Совет:</strong> При оплате через банк указывайте назначение платежа: <em>"Членские взносы / Электроэнергия, ФИО, № участка"</em>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+            <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О Товариществе</a>
+                <a href="tarify.html" class="active">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="sluzhby.html">Службы</a>
+                <a href="pravlenie.html">Правление</a>
+                <a href="dokumenty.html">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+</script>
+
+    <script>
+        // Highlight active footer link
+        (function() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const footerLinks = document.querySelectorAll('.footer-col a');
+            footerLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

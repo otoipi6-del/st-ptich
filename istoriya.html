@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История СТ ПТИЧЬ — СТ ПТИЧЬ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .history-intro {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border-left: 4px solid #d97706;
+            padding: 24px 28px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 32px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #92400e;
+        }
+        .history-intro a {
+            color: #d97706;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .history-intro a:hover {
+            color: #92400e;
+        }
+        .years-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 16px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .year-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a1a1a;
+            border-radius: var(--radius-md);
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 2px solid #f59e0b;
+        }
+        .year-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            margin-top: 40px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 480px) {
+            .years-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            .year-btn {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+        }
+    </style>
+    <style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+    </style>
+    <style>
+        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
+        .footer-nav a:hover { color: var(--accent); }
+        .footer-nav a.active { color: var(--accent); font-weight: 700; }
+        .footer-nav a.active::before { content: '▸ '; }
+    </style>
+</head>
+<body>
+</div>
+
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="sluzhby.html">Службы</a></li>
+                    <li><a href="pravlenie.html">Правление</a></li>
+                    <li><a href="dokumenty.html">Документы</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>История СТ ПТИЧЬ</h1>
+            <p>Хроника событий садового товарищества по годам</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="max-width: 900px; margin: 0 auto;">
+
+            <div class="history-intro">
+                Если у Вас есть интересная информация о нашем Товариществе и Вы считаете, что ее стоит разместить на сайте, присылайте материалы администратору сайта 👉 <a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" target="_blank">в Viber</a>.
+            </div>
+
+            <div class="section-header" style="margin-bottom: 30px;">
+                <h2>Выберите год</h2>
+            </div>
+
+            <div class="years-grid">
+                <a href="1986.html" class="year-btn">1986</a>
+                <a href="1987.html" class="year-btn">1987</a>
+                <a href="2020.html" class="year-btn">2020</a>
+                <a href="2021.html" class="year-btn">2021</a>
+                <a href="2022.html" class="year-btn">2022</a>
+                <a href="2023.html" class="year-btn">2023</a>
+                <a href="2024.html" class="year-btn">2024</a>
+                <a href="2025.html" class="year-btn">2025</a>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="about.html" class="back-link">← Вернуться к О Товариществе</a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html" class="active">О Товариществе</a>
+                <a href="tarify.html">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="sluzhby.html">Службы</a>
+                <a href="pravlenie.html">Правление</a>
+                <a href="dokumenty.html">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+</script>
+
+    <script>
+        (function() {
+            const currentPage = window.location.pathname.split("/").pop() || "index.html";
+            const footerLinks = document.querySelectorAll(".footer-nav a");
+            footerLinks.forEach(link => {
+                if (link.getAttribute("href") === currentPage) {
+                    link.classList.add("active");
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
