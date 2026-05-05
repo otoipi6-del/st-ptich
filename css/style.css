@@ -533,13 +533,6 @@ body {
     color: var(--gray-500);
 }
 
-/* RESTRICT TEXT WIDTH FOR READABILITY */
-.info-block p {
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 /* ===== INFO BLOCKS ===== */
 .info-block {
     max-width: 900px;
