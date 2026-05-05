@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -60,7 +60,7 @@
             gap: 12px;
             flex-wrap: wrap;
         }
-        .doc-actions a {
+        .doc-actions a, .doc-actions button {
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -70,6 +70,9 @@
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
         }
         .btn-view {
             background: var(--primary);
@@ -86,37 +89,66 @@
         .btn-download:hover {
             background: var(--gray-300);
         }
-        .pdf-viewer {
-            width: 100%;
-            height: 700px;
-            border: none;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            margin-top: 20px;
-        }
-        .pdf-section {
+
+        /* ===== PDF MODAL OVERLAY ===== */
+        .pdf-modal-overlay {
             display: none;
-            margin-top: 30px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInOverlay 0.2s ease;
         }
-        .pdf-section.active {
-            display: block;
+        .pdf-modal-overlay.active {
+            display: flex;
         }
-        .pdf-header {
+        @keyframes fadeInOverlay {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .pdf-modal {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            width: 100%;
+            max-width: 1100px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: scaleIn 0.25s ease;
+            overflow: hidden;
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .pdf-modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 12px;
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--gray-100);
+            background: var(--gray-100);
+            flex-shrink: 0;
         }
-        .pdf-header h3 {
-            font-size: 20px;
+        .pdf-modal-header h3 {
+            font-size: 18px;
             font-weight: 700;
             color: var(--gray-900);
+            margin: 0;
         }
-        .btn-close {
+        .pdf-modal-close {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
             padding: 8px 16px;
-            background: var(--gray-100);
+            background: var(--white);
             color: var(--gray-700);
             border: 1px solid var(--gray-300);
             border-radius: var(--radius-sm);
@@ -124,17 +156,65 @@
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
+            font-family: inherit;
         }
-        .btn-close:hover {
+        .pdf-modal-close:hover {
             background: var(--gray-300);
         }
+        .pdf-modal-body {
+            flex: 1;
+            overflow: auto;
+            padding: 0;
+            background: var(--gray-100);
+            min-height: 0;
+        }
+        .pdf-modal-body iframe,
+        .pdf-modal-body embed {
+            width: 100%;
+            height: 100%;
+            min-height: 60vh;
+            border: none;
+            display: block;
+        }
+        .pdf-modal-footer {
+            padding: 12px 24px;
+            border-top: 1px solid var(--gray-100);
+            background: var(--white);
+            text-align: center;
+            font-size: 13px;
+            color: var(--gray-500);
+            flex-shrink: 0;
+        }
+        .pdf-modal-footer a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             .doc-card {
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .pdf-viewer {
-                height: 400px;
+            .pdf-modal-overlay {
+                padding: 8px;
+            }
+            .pdf-modal {
+                max-height: 95vh;
+                border-radius: var(--radius-sm);
+            }
+            .pdf-modal-header {
+                padding: 12px 16px;
+            }
+            .pdf-modal-header h3 {
+                font-size: 15px;
+            }
+            .pdf-modal-close {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .pdf-modal-body iframe,
+            .pdf-modal-body embed {
+                min-height: 50vh;
             }
         }
     </style>
@@ -150,7 +230,7 @@
                 white-space: nowrap;
             }
         </style>
-    
+
 <style>
         .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
         .footer-nav a:hover { color: var(--accent); }
@@ -208,22 +288,10 @@
                     <h3>Устав СТ ПТИЧЬ</h3>
                     <p>Утверждён протоколом Общего собрания членов СТ ПТИЧЬ д. Заболотье №2 от 1 сентября 2010 г. Зарегистрирован решением Минского районного исполнительного комитета.</p>
                     <div class="doc-actions">
-                        <a href="#" class="btn-view" onclick="showPdf(); return false;">👁️ Просмотреть</a>
+                        <button class="btn-view" onclick="openPdfModal('documents/ustav-st-ptich.pdf', 'Устав СТ ПТИЧЬ')">👁️ Просмотреть</button>
                         <a href="documents/ustav-st-ptich.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- PDF Viewer Section -->
-            <div class="pdf-section" id="pdfSection">
-                <div class="pdf-header">
-                    <h3>📄 Устав СТ ПТИЧЬ</h3>
-                    <button class="btn-close" onclick="hidePdf()">✕ Закрыть просмотр</button>
-                </div>
-                <embed class="pdf-viewer" src="documents/ustav-st-ptich.pdf" type="application/pdf">
-                <p style="text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray-500);">
-                    Если документ не отображается, <a href="documents/ustav-st-ptich.pdf" download style="color: var(--primary);">скачайте PDF</a> или откройте в отдельной вкладке.
-                </p>
             </div>
 
             <!-- Протоколы общих собраний -->
@@ -253,6 +321,22 @@
         </div>
     </section>
 
+    <!-- PDF Modal Overlay -->
+    <div class="pdf-modal-overlay" id="pdfModalOverlay" onclick="closePdfModal(event)">
+        <div class="pdf-modal" onclick="event.stopPropagation()">
+            <div class="pdf-modal-header">
+                <h3 id="pdfModalTitle">📄 Просмотр документа</h3>
+                <button class="pdf-modal-close" onclick="closePdfModal()">✕ Закрыть</button>
+            </div>
+            <div class="pdf-modal-body">
+                <embed id="pdfModalViewer" src="" type="application/pdf">
+            </div>
+            <div class="pdf-modal-footer">
+                Если документ не отображается, <a id="pdfModalDownload" href="#" download>скачайте PDF</a> или откройте в отдельной вкладке.
+            </div>
+        </div>
+    </div>
+
             <footer class="footer">
         <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
             <div class="footer-nav" style="margin-bottom:16px;">
@@ -276,14 +360,29 @@
     </footer>
 
     <script>
-        function showPdf() {
-            document.getElementById('pdfSection').classList.add('active');
-            document.getElementById('pdfSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        function openPdfModal(src, title) {
+            document.getElementById('pdfModalViewer').src = src;
+            document.getElementById('pdfModalTitle').textContent = '📄 ' + title;
+            document.getElementById('pdfModalDownload').href = src;
+            document.getElementById('pdfModalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-        function hidePdf() {
-            document.getElementById('pdfSection').classList.remove('active');
+        function closePdfModal(event) {
+            // Close on overlay click or button click
+            if (event && event.target !== document.getElementById('pdfModalOverlay') && event.target.closest('.pdf-modal-close') === null) {
+                return;
+            }
+            document.getElementById('pdfModalOverlay').classList.remove('active');
+            document.getElementById('pdfModalViewer').src = '';
+            document.body.style.overflow = '';
         }
-</script>
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePdfModal();
+            }
+        });
+    </script>
 
     <script>
         (function() {
