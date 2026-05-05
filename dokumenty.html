@@ -123,6 +123,7 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: scaleIn 0.25s ease;
             overflow: hidden;
+            position: relative;
         }
         @keyframes scaleIn {
             from { opacity: 0; transform: scale(0.92); }
@@ -136,30 +137,46 @@
             border-bottom: 1px solid var(--gray-100);
             background: var(--gray-100);
             flex-shrink: 0;
+            position: relative;
         }
         .pdf-modal-header h3 {
             font-size: 18px;
             font-weight: 700;
             color: var(--gray-900);
             margin: 0;
+            padding-right: 50px;
         }
         .pdf-modal-close {
-            display: inline-flex;
+            position: absolute;
+            top: 50%;
+            right: 16px;
+            transform: translateY(-50%);
+            width: 36px;
+            height: 36px;
+            display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
-            background: var(--white);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-weight: 600;
+            justify-content: center;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
             font-family: inherit;
+            line-height: 1;
+            padding: 0;
+            z-index: 10;
         }
         .pdf-modal-close:hover {
-            background: var(--gray-300);
+            background: #b02a37;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .pdf-modal-close svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
         }
         .pdf-modal-body {
             flex: 1;
@@ -167,6 +184,7 @@
             padding: 0;
             background: #525659;
             min-height: 0;
+            position: relative;
         }
         .pdf-modal-body iframe {
             width: 100%;
@@ -267,7 +285,7 @@
                     <p>Утверждён протоколом Общего собрания членов СТ ПТИЧЬ д. Заболотье №2 от 1 сентября 2010 г. Зарегистрирован решением Минского районного исполнительного комитета.</p>
                     <div class="doc-actions">
                         <button class="btn-view" onclick="viewPdf('documents/ustav-st-ptich.pdf', 'Устав СТ ПТИЧЬ')">👁️ Просмотреть</button>
-                        <a href="documents/ustav-st-ptich.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                        <a href="documents/ustav-st-ich.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
             </div>
@@ -304,7 +322,11 @@
         <div class="pdf-modal" onclick="event.stopPropagation()">
             <div class="pdf-modal-header">
                 <h3 id="pdfModalTitle">📄 Просмотр документа</h3>
-                <button class="pdf-modal-close" onclick="closePdfModal()">✕ Закрыть</button>
+                <button class="pdf-modal-close" onclick="closePdfModal()" title="Закрыть">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.3 5.7a1 1 0 0 0-1.4 0L12 10.6 7.1 5.7a1 1 0 0 0-1.4 1.4L10.6 12l-4.9 4.9a1 1 0 0 0 1.4 1.4L12 13.4l4.9 4.9a1 1 0 0 0 1.4-1.4L13.4 12l4.9-4.9a1 1 0 0 0 0-1.4z"/>
+                    </svg>
+                </button>
             </div>
             <div class="pdf-modal-body">
                 <iframe id="pdfModalViewer" src="" title="PDF просмотрщик"></iframe>
@@ -338,17 +360,14 @@
     </footer>
 
     <script>
-        // Detect mobile: screen width <= 768px or touch device
         function isMobile() {
             return window.innerWidth <= 768 || ('ontouchstart' in window && navigator.maxTouchPoints > 0);
         }
 
         function viewPdf(src, title) {
             if (isMobile()) {
-                // On mobile: open in new tab for native PDF viewer with proper scrolling
                 window.open(src, '_blank');
             } else {
-                // On desktop: open in modal overlay
                 openPdfModal(src, title);
             }
         }
