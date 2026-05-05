@@ -1,300 +1,184 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Документы — СТ ПТИЧЬ</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>СТ ПТИЧЬ - Документы</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        .doc-card {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            border-radius: var(--radius-md);
-            padding: 28px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid #2d7a3e;
-            transition: var(--transition);
+        /* Дополнительные стили для страницы документов */
+        .doc-download-group {
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
+            gap: 10px;
+            margin-left: auto;
         }
-        .doc-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateX(4px);
+        .doc-download-view {
+            background: var(--gray-500);
         }
-        .doc-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-            color: white;
+        .doc-download-view:hover {
+            background: var(--gray-700);
         }
-        .doc-icon.ustav {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-        }
-        .doc-icon.protocol {
-            background: linear-gradient(135deg, #eab308, #ca8a04);
-        }
-        .doc-info {
-            flex: 1;
-        }
-        .doc-info h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 6px;
-        }
-        .doc-info p {
-            font-size: 14px;
-            color: var(--gray-500);
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-        .doc-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .doc-actions a {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        .btn-view {
+        .doc-download-pdf {
             background: var(--primary);
-            color: white;
         }
-        .btn-view:hover {
+        .doc-download-pdf:hover {
             background: var(--primary-dark);
         }
-        .btn-download {
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-        }
-        .btn-download:hover {
-            background: var(--gray-300);
-        }
-        .pdf-viewer {
-            width: 100%;
-            height: 700px;
-            border: none;
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-md);
-            margin-top: 20px;
-        }
-        .pdf-section {
-            display: none;
-            margin-top: 30px;
-        }
-        .pdf-section.active {
-            display: block;
-        }
-        .pdf-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-        .pdf-header h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--gray-900);
-        }
-        .btn-close {
+        .doc-download {
             padding: 8px 16px;
-            background: var(--gray-100);
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
             border-radius: var(--radius-sm);
-            font-size: 14px;
+            text-decoration: none;
+            font-size: 13px;
             font-weight: 600;
-            cursor: pointer;
             transition: var(--transition);
-        }
-        .btn-close:hover {
-            background: var(--gray-300);
+            color: white;
+            display: inline-block;
         }
         @media (max-width: 768px) {
-            .doc-card {
-                flex-direction: column;
-                align-items: flex-start;
+            .doc-item {
+                flex-wrap: wrap;
             }
-            .pdf-viewer {
-                height: 400px;
+            .doc-download-group {
+                margin-left: 64px;
             }
         }
-    </style>
-
-        <style>
-            .footer-col-links {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 12px 24px;
-            }
-            .footer-col-links a {
-                display: inline !important;
-                white-space: nowrap;
-            }
-        </style>
-    
-<style>
-        .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
-        .footer-nav a:hover { color: var(--accent); }
-        .footer-nav a.active { color: var(--accent); font-weight: 700; }
-        .footer-nav a.active::before { content: '▸ '; }
     </style>
 </head>
 <body>
-    <!-- Search Bar -->
-</div>
 
-    <!-- Breadcrumbs -->
+    <!-- Подключаем внешний вид с главной страницы -->
+    <div class="search-bar">
+        <div class="search-bar-inner">
+            <input type="text" class="search-input" placeholder="Поиск по сайту..." id="searchInput">
+            <button class="search-btn" onclick="searchSite()">🔍 Найти</button>
+        </div>
     </div>
 
     <header class="header">
         <div class="header-top">
             <a href="index.html" class="logo">
-                <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
-                <div class="logo-text">
-                    ПТИЧЬ
-                    <span>Садовое товарищество</span>
-                </div>
+                <div class="logo-icon">🌿</div>
+                <div class="logo-text">СТ ПТИЧЬ<br><span>Садовое товарищество</span></div>
             </a>
-            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+            <button class="menu-toggle" id="menuToggle">☰</button>
         </div>
-        <nav class="nav">
+        <nav class="nav" id="mainNav">
             <div class="nav-inner">
                 <ul class="nav-list">
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="about.html">О Товариществе</a></li>
-                    <li><a href="tarify.html">Тарифы</a></li>
-                    <li><a href="karta.html">Карта</a></li>
-                    <li><a href="sluzhby.html">Службы</a></li>
-                    <li><a href="pravlenie.html">Правление</a></li>
-                    <li><a href="dokumenty.html" class="active">Документы</a></li>
-                    </ul>
+                    <li><a href="tariffs.html">Тарифы</a></li>
+                    <li><a href="map.html">Карта</a></li>
+                    <li><a href="services.html">Службы</a></li>
+                    <li><a href="management.html">Правление</a></li>
+                    <li><a href="documents.html" class="active">Документы</a></li>
+                </ul>
             </div>
         </nav>
     </header>
 
-    <section class="hero" style="padding: 60px 24px;">
-        <div class="hero-content">
-            <h1>Документы</h1>
-            <p>Устав, протоколы, сметы и другие документы СТ ПТИЧЬ</p>
+    <main>
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <a href="index.html">Главная</a> <span>→</span>
+                <span class="current">Документы</span>
+            </div>
         </div>
-    </section>
 
-    <section class="section">
-        <div style="max-width: 900px; margin: 0 auto;">
+        <section class="section">
+            <div class="section-header">
+                <h2>Документы</h2>
+                <p>Устав, протоколы, сметы и другие документы СТ ПТИЧЬ</p>
+            </div>
 
-            <!-- Устав СТ ПТИЧЬ -->
-            <div class="doc-card">
-                <div class="doc-icon ustav">📄</div>
-                <div class="doc-info">
-                    <h3>Устав СТ ПТИЧЬ</h3>
-                    <p>Утверждён протоколом Общего собрания членов СТ ПТИЧЬ д. Заболотье №2 от 1 сентября 2010 г. Зарегистрирован решением Минского районного исполнительного комитета.</p>
-                    <div class="doc-actions">
-                        <a href="#" class="btn-view" onclick="showPdf(); return false;">👁️ Просмотреть</a>
-                        <a href="documents/ustav-st-ptich.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+            <div class="info-block">
+                <!-- Устав -->
+                <div class="doc-item">
+                    <div class="doc-icon">📄</div>
+                    <div class="doc-info">
+                        <h4>Устав СТ ПТИЧЬ</h4>
+                        <p>Утверждён протоколом Общего собрания членов СТ ПТИЧЬ д. Заболотье №2 от 1 сентября 2010 г. Зарегистрирован решением Минского районного исполнительного комитета.</p>
+                    </div>
+                    <div class="doc-download-group">
+                        <a href="docs/ustav.pdf" target="_blank" class="doc-download doc-download-view">👁️ Просмотреть</a>
+                        <a href="docs/ustav.pdf" download class="doc-download doc-download-pdf">⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+
+                <!-- Протоколы общих собраний - ссылка на страницу с протоколами -->
+                <div class="doc-item">
+                    <div class="doc-icon">📋</div>
+                    <div class="doc-info">
+                        <h4>Протоколы общих собраний</h4>
+                        <p>Протоколы общих собраний членов СТ ПТИЧЬ. Включают решения по членским взносам, благоустройству, электроснабжению и другим вопросам.</p>
+                    </div>
+                    <div class="doc-download-group">
+                        <a href="protocols.html" class="doc-download doc-download-view">👁️ Открыть протоколы</a>
+                    </div>
+                </div>
+
+                <!-- Правила чата -->
+                <div class="doc-item">
+                    <div class="doc-icon">💬</div>
+                    <div class="doc-info">
+                        <h4>Правила чата СТ ПТИЧЬ</h4>
+                        <p>Правила поведения и общения в групповом чате членов СТ ПТИЧЬ.</p>
+                    </div>
+                    <div class="doc-download-group">
+                        <a href="chat-rules.html" class="doc-download doc-download-view">👁️ Просмотреть</a>
                     </div>
                 </div>
             </div>
+        </section>
+    </main>
 
-            <!-- PDF Viewer Section -->
-            <div class="pdf-section" id="pdfSection">
-                <div class="pdf-header">
-                    <h3>📄 Устав СТ ПТИЧЬ</h3>
-                    <button class="btn-close" onclick="hidePdf()">✕ Закрыть просмотр</button>
-                </div>
-                <embed class="pdf-viewer" src="documents/ustav-st-ptich.pdf" type="application/pdf">
-                <p style="text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray-500);">
-                    Если документ не отображается, <a href="documents/ustav-st-ptich.pdf" download style="color: var(--primary);">скачайте PDF</a> или откройте в отдельной вкладке.
-                </p>
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <p>📍 Минская область, Минский район, д. Заболотье, СТ ПТИЧЬ</p>
+                <p>📞 <a href="tel:+375296463715">+375 (29) 646-37-15</a></p>
+                <p>✉️ <a href="mailto:info@st-ptich.by">info@st-ptich.by</a></p>
             </div>
-
-            <!-- Протоколы общих собраний -->
-            <div class="doc-card">
-                <div class="doc-icon protocol">📋</div>
-                <div class="doc-info">
-                    <h3>Протоколы общих собраний</h3>
-                    <p>Протоколы общих собраний членов СТ ПТИЧЬ. Включают решения по членским взносам, благоустройству, электроснабжению и другим вопросам.</p>
-                    <div class="doc-actions">
-                        <a href="protokoly.html" class="btn-view">👁️ Открыть протоколы</a>
-                    </div>
-                </div>
+            <div class="footer-col">
+                <h4>Разделы</h4>
+                <p><a href="index.html">Главная</a></p>
+                <p><a href="about.html">О Товариществе</a></p>
+                <p><a href="tariffs.html">Тарифы</a></p>
+                <p><a href="map.html">Карта</a></p>
+                <p><a href="services.html">Службы</a></p>
+                <p><a href="management.html">Правление</a></p>
+                <p><a href="documents.html">Документы</a></p>
             </div>
-
-            <!-- Правила чата СТ ПТИЧЬ -->
-            <div class="doc-card">
-                <div class="doc-icon protocol">💬</div>
-                <div class="doc-info">
-                    <h3>Правила чата СТ ПТИЧЬ</h3>
-                    <p>Правила поведения и общения в групповом чате членов СТ ПТИЧЬ.</p>
-                    <div class="doc-actions">
-                        <a href="pravila-chata.html" class="btn-view">👁️ Просмотреть</a>
-                    </div>
-                </div>
+            <div class="footer-col">
+                <h4>Информация</h4>
+                <p>Информационный сайт</p>
+                <p>© СТ ПТИЧЬ — Садовое товарищество</p>
+                <p>Все права защищены. 2026 г.</p>
             </div>
-
         </div>
-    </section>
-
-            <footer class="footer">
-        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
-            <div class="footer-nav" style="margin-bottom:16px;">
-                <a href="index.html">Главная</a>
-                <a href="about.html">О Товариществе</a>
-                <a href="tarify.html">Тарифы</a>
-                <a href="karta.html">Карта</a>
-                <a href="sluzhby.html">Службы</a>
-                <a href="pravlenie.html">Правление</a>
-                <a href="dokumenty.html" class="active">Документы</a>
-            </div>
-            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
-                <span>Информационный сайт</span>
-                <span style="margin:0 20px;"></span>
-                <a href="pravlenie.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
-            </div>
-            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
-                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
-            </div>
+        <div class="footer-bottom">
+            <p>© СТ ПТИЧЬ — Садовое товарищество. Все права защищены. 2026 г.</p>
         </div>
     </footer>
 
     <script>
-        function showPdf() {
-            document.getElementById('pdfSection').classList.add('active');
-            document.getElementById('pdfSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        function hidePdf() {
-            document.getElementById('pdfSection').classList.remove('active');
-        }
-</script>
-
-    <script>
-        (function() {
-            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-            const footerLinks = document.querySelectorAll('.footer-col a');
-            footerLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPage) {
-                    link.classList.add('active');
-                }
+        // Мобильное меню
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
             });
-        })();
+        }
+
+        // Поиск
+        function searchSite() {
+            const query = document.getElementById('searchInput').value;
+            if (query.trim()) {
+                alert('Поиск по сайту: ' + query + '\nФункция в разработке');
+            }
+        }
     </script>
 </body>
 </html>
