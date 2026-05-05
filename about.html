@@ -23,7 +23,83 @@
         .footer-nav a:hover { color: var(--accent); }
         .footer-nav a.active { color: var(--accent); font-weight: 700; }
         .footer-nav a.active::before { content: '▸ '; }
+    <style>
+        .doc-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .doc-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .doc-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+            color: white;
+        }
+        .doc-icon.protocol {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+        }
+        .doc-info {
+            flex: 1;
+        }
+        .doc-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .doc-info p {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .doc-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .doc-actions a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .btn-view {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-view:hover {
+            background: var(--primary-dark);
+        }
+        @media (max-width: 768px) {
+            .doc-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
     </style>
+</style>
 </head>
 <body>
     <!-- Search Bar -->
@@ -58,10 +134,10 @@
         </nav>
     </header>
 
-    <section class="hero" style="padding: 40px 24px;">
+    <section class="hero" style="padding: 60px 24px;">
         <div class="hero-content">
             <h1>О товариществе</h1>
-            <p>Информация о СТ ПТИЧЬ, его структуре и организации</p>
+            <p>Информация об СТ ПТИЧЬ, его истории и развитии</p>
         </div>
     </section>
 
@@ -80,6 +156,22 @@
                 <li>Подъездные пути</li>
                 <li>Общественные зоны отдыха</li>
             </ul>
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="doc-card" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: var(--radius-md); padding: 28px; border-left: 4px solid #2d7a3e;">
+                <div class="doc-icon protocol">📜</div>
+                <div class="doc-info">
+                    <h3>История СТ ПТИЧЬ</h3>
+                    <p>Хроника событий, важные даты и этапы развития садового товарищества с момента основания.</p>
+                    <div class="doc-actions">
+                        <a href="istoriya.html" class="btn-view">👁️ Посмотреть</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

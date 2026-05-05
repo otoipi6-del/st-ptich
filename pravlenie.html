@@ -113,7 +113,40 @@
         .footer-nav a:hover { color: var(--accent); }
         .footer-nav a.active { color: var(--accent); font-weight: 700; }
         .footer-nav a.active::before { content: '▸ '; }
-    </style>
+            .donate-box {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            margin-top: 16px;
+            border-left: 3px solid var(--accent);
+        }
+        .donate-box p {
+            font-size: 13px !important;
+            color: var(--gray-600) !important;
+            line-height: 1.5 !important;
+            margin-bottom: 12px !important;
+        }
+        .btn-donate {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-donate:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+</style>
 </head>
 <body>
     <!-- Search Bar -->
@@ -148,7 +181,7 @@
         </nav>
     </header>
 
-    <section class="hero" style="padding: 40px 24px;">
+    <section class="hero" style="padding: 60px 24px;">
         <div class="hero-content">
             <h1>Правление и штат СТ ПТИЧЬ</h1>
             <p>Контакты председателя, бухгалтера и членов правления</p>
@@ -168,6 +201,10 @@
                 <span class="role">Председатель</span>
                 <p><a href="tel:+375296428604" class="phone">📞 +375 (29) 642-86-04</a></p>
                 <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать Председателю в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
+            </div>
             </div>
 
             <hr class="staff-divider">
@@ -178,6 +215,10 @@
                 <span class="role">Бухгалтер</span>
                 <p><a href="tel:+375297658773" class="phone">📞 +375 (29) 765-87-73</a></p>
                 <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать бухгалтеру в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
+            </div>
             </div>
 
             <hr class="staff-divider">
@@ -188,6 +229,10 @@
                 <span class="role">Электрик</span>
                 <p><a href="tel:+375296959737" class="phone">📞 +375 (29) 695-97-37</a></p>
                 <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать электрику в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
+            </div>
             </div>
 
             <div class="section-divider"></div>
@@ -212,6 +257,10 @@
                 <span class="role">Администратор сайта</span>
                 <p><a href="tel:+375296463715" class="phone">📞 +375 (29) 646-37-15</a></p>
                 <p><a href="https://invite.viber.com/?g2=AQB%2F5xRq3bJtD3n8Y7c9X6b5Z4a3S2d1F0gH9iJ8kL7mN6oP5qR4sT3uV2wX1yZ0" class="viber-link" target="_blank">💬 Написать администратору сайта в Viber</a></p>
+            <div class="donate-box">
+                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
+                <a href="https://pay.raschet.by/#00020132370010by.raschet0107432515110083372096653039335802BY6304B009" class="btn-donate" target="_blank">💳 Перевести деньги</a>
+            </div>
             </div>
 
         </div>
