@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Документы — СТ ПТИЧЬ</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -90,7 +90,7 @@
             background: var(--gray-300);
         }
 
-        /* ===== PDF MODAL OVERLAY ===== */
+        /* ===== PDF MODAL OVERLAY (desktop only) ===== */
         .pdf-modal-overlay {
             display: none;
             position: fixed;
@@ -98,14 +98,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
             z-index: 9999;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding: 0;
+            padding: 24px;
             animation: fadeInOverlay 0.2s ease;
-            overflow: hidden;
-            -webkit-overflow-scrolling: touch;
         }
         .pdf-modal-overlay.active {
             display: flex;
@@ -116,47 +114,40 @@
         }
         .pdf-modal {
             background: var(--white);
-            border-radius: 0;
+            border-radius: var(--radius-md);
             width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 1100px;
+            max-height: 90vh;
             display: flex;
             flex-direction: column;
-            box-shadow: none;
-            animation: slideUp 0.25s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: scaleIn 0.25s ease;
             overflow: hidden;
-            position: relative;
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
         }
         .pdf-modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--gray-200);
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--gray-100);
             background: var(--gray-100);
             flex-shrink: 0;
-            min-height: 52px;
         }
         .pdf-modal-header h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--gray-900);
             margin: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: calc(100% - 100px);
         }
         .pdf-modal-close {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 14px;
+            padding: 8px 16px;
             background: var(--white);
             color: var(--gray-700);
             border: 1px solid var(--gray-300);
@@ -166,31 +157,27 @@
             cursor: pointer;
             transition: var(--transition);
             font-family: inherit;
-            flex-shrink: 0;
         }
         .pdf-modal-close:hover {
             background: var(--gray-300);
         }
         .pdf-modal-body {
             flex: 1;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
+            overflow: hidden;
             padding: 0;
             background: #525659;
-            position: relative;
             min-height: 0;
         }
         .pdf-modal-body iframe {
             width: 100%;
             height: 100%;
-            min-height: 100%;
+            min-height: 60vh;
             border: none;
             display: block;
-            overflow: auto;
         }
         .pdf-modal-footer {
-            padding: 10px 16px;
-            border-top: 1px solid var(--gray-200);
+            padding: 12px 24px;
+            border-top: 1px solid var(--gray-100);
             background: var(--white);
             text-align: center;
             font-size: 13px;
@@ -202,37 +189,6 @@
             font-weight: 600;
         }
 
-        @media (min-width: 769px) {
-            .pdf-modal-overlay {
-                align-items: center;
-                padding: 24px;
-                background: rgba(0, 0, 0, 0.75);
-            }
-            .pdf-modal {
-                border-radius: var(--radius-md);
-                max-width: 1100px;
-                max-height: 90vh;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                animation: scaleIn 0.25s ease;
-            }
-            @keyframes scaleIn {
-                from { opacity: 0; transform: scale(0.92); }
-                to { opacity: 1; transform: scale(1); }
-            }
-            .pdf-modal-header {
-                padding: 14px 24px;
-            }
-            .pdf-modal-header h3 {
-                font-size: 18px;
-                max-width: none;
-            }
-            .pdf-modal-body iframe {
-                min-height: 60vh;
-            }
-            .pdf-modal-footer {
-                padding: 12px 24px;
-            }
-        }
         @media (max-width: 768px) {
             .doc-card {
                 flex-direction: column;
@@ -310,7 +266,7 @@
                     <h3>Устав СТ ПТИЧЬ</h3>
                     <p>Утверждён протоколом Общего собрания членов СТ ПТИЧЬ д. Заболотье №2 от 1 сентября 2010 г. Зарегистрирован решением Минского районного исполнительного комитета.</p>
                     <div class="doc-actions">
-                        <button class="btn-view" onclick="openPdfModal('documents/ustav-st-ptich.pdf', 'Устав СТ ПТИЧЬ')">👁️ Просмотреть</button>
+                        <button class="btn-view" onclick="viewPdf('documents/ustav-st-ptich.pdf', 'Устав СТ ПТИЧЬ')">👁️ Просмотреть</button>
                         <a href="documents/ustav-st-ptich.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
@@ -343,7 +299,7 @@
         </div>
     </section>
 
-    <!-- PDF Modal Overlay -->
+    <!-- PDF Modal Overlay (desktop only) -->
     <div class="pdf-modal-overlay" id="pdfModalOverlay" onclick="closePdfModal(event)">
         <div class="pdf-modal" onclick="event.stopPropagation()">
             <div class="pdf-modal-header">
@@ -382,6 +338,21 @@
     </footer>
 
     <script>
+        // Detect mobile: screen width <= 768px or touch device
+        function isMobile() {
+            return window.innerWidth <= 768 || ('ontouchstart' in window && navigator.maxTouchPoints > 0);
+        }
+
+        function viewPdf(src, title) {
+            if (isMobile()) {
+                // On mobile: open in new tab for native PDF viewer with proper scrolling
+                window.open(src, '_blank');
+            } else {
+                // On desktop: open in modal overlay
+                openPdfModal(src, title);
+            }
+        }
+
         function openPdfModal(src, title) {
             document.getElementById('pdfModalViewer').src = src;
             document.getElementById('pdfModalTitle').textContent = '📄 ' + title;
