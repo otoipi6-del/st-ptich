@@ -308,12 +308,47 @@
         .card-amber .card-arrow { color: #d97706; }
         .card-amber:hover { border-color: #d97706; }
 
-        /* ===== HERO MOBILE FIX ===== */
+        /* ===== BACKGROUND SLIDER ===== */
         .hero-main {
+            position: relative;
+            overflow: hidden;
             min-height: auto;
             padding: 40px 20px 50px;
         }
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.35) 100%);
+            z-index: 1;
+        }
         .hero-main-content {
+            position: relative;
+            z-index: 2;
             padding: 20px 0;
         }
         .hero-main-content img {
@@ -340,6 +375,34 @@
             padding: 10px 20px;
             font-size: 14px;
         }
+        /* Slider dots */
+        .slider-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: 2px solid rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .slider-dot.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: scale(1.2);
+        }
+        .slider-dot:hover {
+            background: rgba(255,255,255,0.7);
+        }
+
         @media (max-width: 480px) {
             .hero-main {
                 padding: 30px 16px 40px;
@@ -364,7 +427,7 @@
                 white-space: nowrap;
             }
         </style>
-    
+
 <style>
         .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
         .footer-nav a:hover { color: var(--accent); }
@@ -403,8 +466,19 @@
         </nav>
     </header>
 
-    <!-- Hero Main -->
+    <!-- Hero Main with Background Slider -->
     <section class="hero-main">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('images/ber.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/ozero.jpg');"></div>
+            <div class="hero-slide" style="background-image: url('images/moln.jpg');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="slider-dots">
+            <span class="slider-dot active" onclick="goToSlide(0)"></span>
+            <span class="slider-dot" onclick="goToSlide(1)"></span>
+            <span class="slider-dot" onclick="goToSlide(2)"></span>
+        </div>
         <div class="hero-main-content">
             <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);"><h1>СТ ПТИЧЬ</h1>
             <p class="subtitle">Садовое товарищество. Ваш уголок природы, комфорта и добрососедства</p>
@@ -470,8 +544,8 @@
                 <p>Устав, протоколы собраний, сметы, договора — для скачивания в PDF</p>
                 <span class="card-arrow">Подробнее →</span>
             </a>
-            
-            
+
+
         </div>
     </section>
 
@@ -499,7 +573,40 @@
     </footer>
 
     <script>
-</script>
+        // Background image slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = slides.length;
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function goToSlide(index) {
+            clearInterval(slideInterval);
+            showSlide(index);
+            startSlider();
+        }
+
+        function startSlider() {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        startSlider();
+    </script>
 
     <script>
         (function() {
