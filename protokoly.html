@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -90,6 +90,8 @@
             background: var(--gray-300);
         }
         .pdf-viewer {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
             width: 100%;
             height: 700px;
             border: none;
@@ -166,6 +168,8 @@
                 align-items: flex-start;
             }
             .pdf-viewer {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
                 height: 400px;
             }
         }
@@ -259,7 +263,7 @@
         </nav>
     </header>
 
-    <section class="hero" style="padding: 60px 24px;">
+    <section class="hero" style="padding: 40px 24px;">
         <div class="hero-content">
             <h1>Протоколы общих собраний</h1>
             <p>Архив протоколов собраний членов СТ «Птичь»</p>
@@ -276,6 +280,10 @@
                     <button class="btn-close" onclick="hidePdf()">✕ Закрыть просмотр</button>
                 </div>
                 <embed class="pdf-viewer" id="pdfViewer" src="" type="application/pdf">
+                <div id="pdfMobileFallback" style="display: none; text-align: center; padding: 40px 20px; background: var(--gray-100); border-radius: var(--radius-md); margin-top: 20px;">
+                    <p style="font-size: 16px; color: var(--gray-700); margin-bottom: 16px;">📱 Для просмотра на смартфоне скачайте PDF:</p>
+                    <a id="pdfMobileLink" href="#" download class="btn-view" style="display: inline-flex;">⬇️ Скачать PDF</a>
+                </div>
                 <p style="text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray-500);">
                     Если документ не отображается, <a id="pdfDownloadLink" href="#" download style="color: var(--primary);">скачайте PDF</a> или откройте в отдельной вкладке.
                 </p>
@@ -394,8 +402,14 @@
             document.getElementById('pdfViewer').src = src;
             document.getElementById('pdfTitle').textContent = '📄 ' + title;
             document.getElementById('pdfDownloadLink').href = src;
+            document.getElementById('pdfMobileLink').href = src;
             document.getElementById('pdfSection').classList.add('active');
             document.getElementById('pdfSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Show mobile fallback on small screens
+            if (window.innerWidth <= 768) {
+                document.getElementById('pdfMobileFallback').style.display = 'block';
+            }
         }
         function hidePdf() {
             document.getElementById('pdfSection').classList.remove('active');
