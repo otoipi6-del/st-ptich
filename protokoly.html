@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Протоколы общих собраний — СТ ПТИЧЬ</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -126,7 +126,7 @@
             text-decoration: underline;
         }
 
-        /* ===== PDF MODAL OVERLAY ===== */
+        /* ===== PDF MODAL OVERLAY (desktop only) ===== */
         .pdf-modal-overlay {
             display: none;
             position: fixed;
@@ -134,14 +134,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
             z-index: 9999;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding: 0;
+            padding: 24px;
             animation: fadeInOverlay 0.2s ease;
-            overflow: hidden;
-            -webkit-overflow-scrolling: touch;
         }
         .pdf-modal-overlay.active {
             display: flex;
@@ -152,47 +150,40 @@
         }
         .pdf-modal {
             background: var(--white);
-            border-radius: 0;
+            border-radius: var(--radius-md);
             width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
+            max-width: 1100px;
+            max-height: 90vh;
             display: flex;
             flex-direction: column;
-            box-shadow: none;
-            animation: slideUp 0.25s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: scaleIn 0.25s ease;
             overflow: hidden;
-            position: relative;
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
         }
         .pdf-modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--gray-200);
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--gray-100);
             background: var(--gray-100);
             flex-shrink: 0;
-            min-height: 52px;
         }
         .pdf-modal-header h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--gray-900);
             margin: 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: calc(100% - 100px);
         }
         .pdf-modal-close {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 14px;
+            padding: 8px 16px;
             background: var(--white);
             color: var(--gray-700);
             border: 1px solid var(--gray-300);
@@ -202,31 +193,27 @@
             cursor: pointer;
             transition: var(--transition);
             font-family: inherit;
-            flex-shrink: 0;
         }
         .pdf-modal-close:hover {
             background: var(--gray-300);
         }
         .pdf-modal-body {
             flex: 1;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
+            overflow: hidden;
             padding: 0;
             background: #525659;
-            position: relative;
             min-height: 0;
         }
         .pdf-modal-body iframe {
             width: 100%;
             height: 100%;
-            min-height: 100%;
+            min-height: 60vh;
             border: none;
             display: block;
-            overflow: auto;
         }
         .pdf-modal-footer {
-            padding: 10px 16px;
-            border-top: 1px solid var(--gray-200);
+            padding: 12px 24px;
+            border-top: 1px solid var(--gray-100);
             background: var(--white);
             text-align: center;
             font-size: 13px;
@@ -238,37 +225,6 @@
             font-weight: 600;
         }
 
-        @media (min-width: 769px) {
-            .pdf-modal-overlay {
-                align-items: center;
-                padding: 24px;
-                background: rgba(0, 0, 0, 0.75);
-            }
-            .pdf-modal {
-                border-radius: var(--radius-md);
-                max-width: 1100px;
-                max-height: 90vh;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-                animation: scaleIn 0.25s ease;
-            }
-            @keyframes scaleIn {
-                from { opacity: 0; transform: scale(0.92); }
-                to { opacity: 1; transform: scale(1); }
-            }
-            .pdf-modal-header {
-                padding: 14px 24px;
-            }
-            .pdf-modal-header h3 {
-                font-size: 18px;
-                max-width: none;
-            }
-            .pdf-modal-body iframe {
-                min-height: 60vh;
-            }
-            .pdf-modal-footer {
-                padding: 12px 24px;
-            }
-        }
         @media (max-width: 768px) {
             .doc-card {
                 flex-direction: column;
@@ -373,7 +329,7 @@
                     <span class="doc-date">21 мая 2016 г. · 65 членов товарищества · г. Минск</span>
                     <p>Повестка: прокладка оптоволоконного кабеля Белтелеком, установка электронных счётчиков, повышение членских взносов до 350 000 руб., плата за повторное подключение, пересмотр зарплаты, поощрение Египко Д.В., изменения в ревизионной комиссии.</p>
                     <div class="doc-actions">
-                        <button class="btn-view" onclick="openPdfModal('documents/protokol-2016.pdf', 'Протокол № 1 общего собрания — 21 мая 2016 г.')">👁️ Просмотреть</button>
+                        <button class="btn-view" onclick="viewPdf('documents/protokol-2016.pdf', 'Протокол № 1 общего собрания — 21 мая 2016 г.')">👁️ Просмотреть</button>
                         <a href="documents/protokol-2016.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
@@ -389,7 +345,7 @@
                     <span class="doc-date">2 мая 2015 г. · 68 членов товарищества · г. Минск</span>
                     <p>Повестка: сбор средств на новое КТП и замену электросетей, отключение неплательщиков, вынос счётчиков на улицу, штрафы за воровство электроэнергии, повышение членских взносов до 300 000 руб.</p>
                     <div class="doc-actions">
-                        <button class="btn-view" onclick="openPdfModal('documents/protokol-2015.pdf', 'Протокол № 1 общего собрания — 2 мая 2015 г.')">👁️ Просмотреть</button>
+                        <button class="btn-view" onclick="viewPdf('documents/protokol-2015.pdf', 'Протокол № 1 общего собрания — 2 мая 2015 г.')">👁️ Просмотреть</button>
                         <a href="documents/protokol-2015.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
@@ -405,7 +361,7 @@
                     <span class="doc-date">8 сентября 2013 г. · 65 членов товарищества · г. Минск</span>
                     <p>Повестка: повышение членских взносов до 200 000 руб. за квартал, утепление колонки водоснабжения, увеличение зарплаты электрику, бухгалтеру и сторожу, рассмотрение заявления Матвеева С.Г., меры к неплательщикам.</p>
                     <div class="doc-actions">
-                        <button class="btn-view" onclick="openPdfModal('documents/protokol-2013.pdf', 'Протокол № 1 общего собрания — 8 сентября 2013 г.')">👁️ Просмотреть</button>
+                        <button class="btn-view" onclick="viewPdf('documents/protokol-2013.pdf', 'Протокол № 1 общего собрания — 8 сентября 2013 г.')">👁️ Просмотреть</button>
                         <a href="documents/protokol-2013.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
@@ -421,7 +377,7 @@
                     <span class="doc-date">30 сентября 2012 г. · 85 членов товарищества · г. Минск</span>
                     <p>Повестка: сроки уплаты членских взносов, меры к неплательщикам, оцифровка земельных участков, ремонт электротрансформатора, утверждение состава правления, переизбрание председателя (Захаров Э.Э.).</p>
                     <div class="doc-actions">
-                        <button class="btn-view" onclick="openPdfModal('documents/protokol-2012.pdf', 'Протокол № 1 общего собрания — 30 сентября 2012 г.')">👁️ Просмотреть</button>
+                        <button class="btn-view" onclick="viewPdf('documents/protokol-2012.pdf', 'Протокол № 1 общего собрания — 30 сентября 2012 г.')">👁️ Просмотреть</button>
                         <a href="documents/protokol-2012.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
@@ -437,7 +393,7 @@
                     <span class="doc-date">31 июля 2011 г. · г. Минск</span>
                     <p>Повестка: ход застройки газопровода, утверждение целевых взносов (6 000 000 руб.), порядок подключения новых потребителей, оплата казначею, выдача ТУ на проектирование, передача газопровода на баланс УП «Мингаз».</p>
                     <div class="doc-actions">
-                        <button class="btn-view" onclick="openPdfModal('documents/protokol-gazoprovod-2011.pdf', 'Протокол собрания застройщиков газопровода — 31 июля 2011 г.')">👁️ Просмотреть</button>
+                        <button class="btn-view" onclick="viewPdf('documents/protokol-gazoprovod-2011.pdf', 'Протокол собрания застройщиков газопровода — 31 июля 2011 г.')">👁️ Просмотреть</button>
                         <a href="documents/protokol-gazoprovod-2011.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
                     </div>
                 </div>
@@ -449,7 +405,7 @@
         </div>
     </section>
 
-    <!-- PDF Modal Overlay -->
+    <!-- PDF Modal Overlay (desktop only) -->
     <div class="pdf-modal-overlay" id="pdfModalOverlay" onclick="closePdfModal(event)">
         <div class="pdf-modal" onclick="event.stopPropagation()">
             <div class="pdf-modal-header">
@@ -488,6 +444,21 @@
     </footer>
 
     <script>
+        // Detect mobile: screen width <= 768px or touch device
+        function isMobile() {
+            return window.innerWidth <= 768 || ('ontouchstart' in window && navigator.maxTouchPoints > 0);
+        }
+
+        function viewPdf(src, title) {
+            if (isMobile()) {
+                // On mobile: open in new tab for native PDF viewer with proper scrolling
+                window.open(src, '_blank');
+            } else {
+                // On desktop: open in modal overlay
+                openPdfModal(src, title);
+            }
+        }
+
         function openPdfModal(src, title) {
             document.getElementById('pdfModalViewer').src = src;
             document.getElementById('pdfModalTitle').textContent = '📄 ' + title;
