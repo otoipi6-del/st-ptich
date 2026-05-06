@@ -113,6 +113,16 @@
             z-index: 2;
         }
     </style>
+    <style>
+        /* Viber links: mobile vs desktop */
+        .d-mobile { display: none !important; }
+        .d-desktop { display: inline-flex !important; }
+        @media (max-width: 768px) {
+            .d-mobile { display: inline-flex !important; }
+            .d-desktop { display: none !important; }
+        }
+    </style>
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
 </head>
 <body>
 </div>
@@ -154,7 +164,7 @@
         <div style="max-width: 900px; margin: 0 auto;">
 
             <div class="history-intro">
-                Если у Вас есть интересная информация о нашем Товариществе и Вы считаете, что ее стоит разместить на сайте, присылайте материалы администратору сайта 👉 <a href="viber://add?number=375296463715" target="_blank">в Viber</a>.
+                Если у Вас есть интересная информация о нашем Товариществе и Вы считаете, что ее стоит разместить на сайте, присылайте материалы администратору сайта 👉 <a href="viber://chat?number=375296463715" class="d-mobile" target="_blank">в Viber (моб.)</a><a href="viber://chat?number=%2B375296463715" class="d-desktop" target="_blank">в Viber</a>.
             </div>
 
             <div class="section-header" style="margin-bottom: 30px;">
