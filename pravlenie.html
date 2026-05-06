@@ -172,6 +172,16 @@
             z-index: 2;
         }
     </style>
+    <style>
+        /* Viber links: mobile vs desktop */
+        .d-mobile { display: none !important; }
+        .d-desktop { display: inline-flex !important; }
+        @media (max-width: 768px) {
+            .d-mobile { display: inline-flex !important; }
+            .d-desktop { display: none !important; }
+        }
+    </style>
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
 </head>
 <body>
     <!-- Search Bar -->
@@ -225,7 +235,10 @@
                 <h4>Египко Дмитрий Вячеславович</h4>
                 <span class="role">Председатель</span>
                 <p><a href="tel:+375296428604" class="phone">📞 +375 (29) 642-86-04</a></p>
-                <p><a href="viber://add?number=375296428604" class="viber-link" target="_blank">💬 Написать Председателю в Viber</a></p>
+                <p>
+                    <a href="viber://chat?number=375296428604" class="viber-link d-mobile" target="_blank">💬 Написать Председателю в Viber (моб.)</a>
+                    <a href="viber://chat?number=%2B375296428604" class="viber-link d-desktop" target="_blank">💬 Написать Председателю в Viber</a>
+                </p>
             <div class="donate-box">
                 <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
                 <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
@@ -239,7 +252,10 @@
                 <h4>Дмитриева Юлия Игоревна</h4>
                 <span class="role">Бухгалтер</span>
                 <p><a href="tel:+375297658773" class="phone">📞 +375 (29) 765-87-73</a></p>
-                <p><a href="viber://add?number=375297658773" class="viber-link" target="_blank">💬 Написать бухгалтеру в Viber</a></p>
+                <p>
+                    <a href="viber://chat?number=375297658773" class="viber-link d-mobile" target="_blank">💬 Написать бухгалтеру в Viber (моб.)</a>
+                    <a href="viber://chat?number=%2B375297658773" class="viber-link d-desktop" target="_blank">💬 Написать бухгалтеру в Viber</a>
+                </p>
             <div class="donate-box">
                 <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
                 <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
@@ -253,7 +269,10 @@
                 <h4>Босяков Анатолий Андреевич</h4>
                 <span class="role">Электрик</span>
                 <p><a href="tel:+375296959737" class="phone">📞 +375 (29) 695-97-37</a></p>
-                <p><a href="viber://add?number=375296959737" class="viber-link" target="_blank">💬 Написать электрику в Viber</a></p>
+                <p>
+                    <a href="viber://chat?number=375296959737" class="viber-link d-mobile" target="_blank">💬 Написать электрику в Viber (моб.)</a>
+                    <a href="viber://chat?number=%2B375296959737" class="viber-link d-desktop" target="_blank">💬 Написать электрику в Viber</a>
+                </p>
             <div class="donate-box">
                 <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
                 <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
@@ -281,7 +300,10 @@
                 <h4>Глинистый Станислав Михайлович</h4>
                 <span class="role">Администратор сайта</span>
                 <p><a href="tel:+375296463715" class="phone">📞 +375 (29) 646-37-15</a></p>
-                <p><a href="viber://add?number=375296463715" class="viber-link" target="_blank">💬 Написать администратору сайта в Viber</a></p>
+                <p>
+                    <a href="viber://chat?number=375296463715" class="viber-link d-mobile" target="_blank">💬 Написать администратору сайта в Viber (моб.)</a>
+                    <a href="viber://chat?number=%2B375296463715" class="viber-link d-desktop" target="_blank">💬 Написать администратору сайта в Viber</a>
+                </p>
             <div class="donate-box">
                 <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
                 <a href="https://pay.raschet.by/#00020132370010by.raschet0107432515110083372096653039335802BY6304B009" class="btn-donate" target="_blank">💳 Перевести деньги</a>
