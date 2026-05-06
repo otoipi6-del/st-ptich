@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
     <title>СТ ПТИЧЬ</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
@@ -442,6 +441,253 @@
         .footer-nav a.active { color: var(--accent); font-weight: 700; }
         .footer-nav a.active::before { content: '▸ '; }
     </style>
+
+    <!-- ===== MOBILE CARD MENU ===== -->
+    <style>
+        /* Mobile overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Mobile menu panel */
+        .mobile-menu-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 85%;
+            max-width: 360px;
+            height: 100%;
+            background: #fff;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+            overflow-y: auto;
+            box-shadow: -8px 0 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu-panel.active {
+            transform: translateX(0);
+        }
+
+        /* Mobile menu header */
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            background: #f8fafc;
+            flex-shrink: 0;
+        }
+        .mobile-menu-header .logo-sm {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .mobile-menu-header .logo-sm img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .mobile-menu-header .logo-sm span {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+        .mobile-menu-close {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: #e5e7eb;
+            color: #374151;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .mobile-menu-close:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        /* Mobile menu cards */
+        .mobile-menu-cards {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 1;
+        }
+        .mobile-menu-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .mobile-menu-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            border-radius: 0 4px 4px 0;
+            transition: width 0.2s;
+        }
+        .mobile-menu-card:hover {
+            transform: translateX(4px);
+        }
+        .mobile-menu-card:hover::before {
+            width: 6px;
+        }
+        .mobile-menu-card.active {
+            border-color: currentColor;
+            font-weight: 700;
+        }
+        .mobile-menu-card.active::before {
+            width: 6px;
+        }
+
+        /* Card colors */
+        .mmc-green {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            color: #166534;
+        }
+        .mmc-green::before { background: #22c55e; }
+        .mmc-green.active { border-color: #22c55e; }
+        .mmc-green .mmc-icon { background: linear-gradient(135deg, #22c55e, #16a34a); }
+
+        .mmc-blue {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            color: #1e40af;
+        }
+        .mmc-blue::before { background: #3b82f6; }
+        .mmc-blue.active { border-color: #3b82f6; }
+        .mmc-blue .mmc-icon { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+
+        .mmc-orange {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            color: #9a3412;
+        }
+        .mmc-orange::before { background: #f97316; }
+        .mmc-orange.active { border-color: #f97316; }
+        .mmc-orange .mmc-icon { background: linear-gradient(135deg, #f97316, #ea580c); }
+
+        .mmc-purple {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            color: #6b21a8;
+        }
+        .mmc-purple::before { background: #a855f7; }
+        .mmc-purple.active { border-color: #a855f7; }
+        .mmc-purple .mmc-icon { background: linear-gradient(135deg, #a855f7, #9333ea); }
+
+        .mmc-teal {
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+            color: #0f766e;
+        }
+        .mmc-teal::before { background: #14b8a6; }
+        .mmc-teal.active { border-color: #14b8a6; }
+        .mmc-teal .mmc-icon { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+
+        .mmc-red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            color: #991b1b;
+        }
+        .mmc-red::before { background: #ef4444; }
+        .mmc-red.active { border-color: #ef4444; }
+        .mmc-red .mmc-icon { background: linear-gradient(135deg, #ef4444, #dc2626); }
+
+        .mmc-indigo {
+            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+            color: #3730a3;
+        }
+        .mmc-indigo::before { background: #6366f1; }
+        .mmc-indigo.active { border-color: #6366f1; }
+        .mmc-indigo .mmc-icon { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+
+        .mmc-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+        }
+        .mmc-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+        .mmc-text {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Desktop: hide mobile menu elements */
+        @media (min-width: 769px) {
+            .mobile-menu-overlay,
+            .mobile-menu-panel,
+            .menu-toggle {
+                display: none !important;
+            }
+        }
+
+        /* Mobile: hide desktop nav, show toggle */
+        @media (max-width: 768px) {
+            .nav {
+                display: none !important;
+            }
+            .menu-toggle {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                background: rgba(255,255,255,0.15);
+                border: 1px solid rgba(255,255,255,0.3);
+                border-radius: 10px;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                backdrop-filter: blur(4px);
+            }
+        }
+
+        /* Prevent body scroll when menu open */
+        body.menu-open {
+            overflow: hidden;
+        }
+    </style>
+
 </head>
 <body>
     <!-- Search Bar -->
@@ -457,7 +703,7 @@
                     <span>Садовое товарищество</span>
                 </div>
             </a>
-            <button class="menu-toggle" onclick="document.querySelector('.nav').classList.toggle('active')">☰</button>
+            <button class="menu-toggle" onclick="openMobileMenu()" aria-label="Открыть меню">☰</button>
         </div>
         <nav class="nav">
             <div class="nav-inner">
@@ -473,6 +719,65 @@
             </div>
         </nav>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu Panel -->
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+        <div class="mobile-menu-header">
+            <div class="logo-sm">
+                <img src="images/logo.jpg" alt="СТ ПТИЧЬ">
+                <span>ПТИЧЬ</span>
+            </div>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Закрыть меню">✕</button>
+        </div>
+        <nav class="mobile-menu-cards">
+            <a href="index.html" class="mobile-menu-card mmc-green" data-page="index.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </div>
+                <span class="mmc-text">Главная</span>
+            </a>
+            <a href="about.html" class="mobile-menu-card mmc-blue" data-page="about.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </div>
+                <span class="mmc-text">О Товариществе</span>
+            </a>
+            <a href="tarify.html" class="mobile-menu-card mmc-orange" data-page="tarify.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                </div>
+                <span class="mmc-text">Тарифы</span>
+            </a>
+            <a href="karta.html" class="mobile-menu-card mmc-purple" data-page="karta.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.5 3l-6 3-6-3-5 2.5v15l5-2.5 6 3 6-3 5 2.5v-15l-5-2.5zm-6 14.5l-6-3v-9l6 3v9zm8-9v9l-5-2.5v-9l5 2.5z"/></svg>
+                </div>
+                <span class="mmc-text">Карта</span>
+            </a>
+            <a href="sluzhby.html" class="mobile-menu-card mmc-teal" data-page="sluzhby.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                </div>
+                <span class="mmc-text">Службы</span>
+            </a>
+            <a href="pravlenie.html" class="mobile-menu-card mmc-red" data-page="pravlenie.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <span class="mmc-text">Правление</span>
+            </a>
+            <a href="dokumenty.html" class="mobile-menu-card mmc-indigo" data-page="dokumenty.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <span class="mmc-text">Документы</span>
+            </a>
+        </nav>
+    </div>
+
 
     <!-- Hero Main with Background Slider -->
     <section class="hero-main">
@@ -648,5 +953,74 @@
             });
         })();
     </script>
+
+    <script>
+        // ===== MOBILE CARD MENU =====
+        (function() {
+            const overlay = document.getElementById('mobileMenuOverlay');
+            const panel = document.getElementById('mobileMenuPanel');
+            let touchStartX = 0;
+            let touchCurrentX = 0;
+
+            window.openMobileMenu = function() {
+                overlay.classList.add('active');
+                panel.classList.add('active');
+                document.body.classList.add('menu-open');
+            };
+
+            window.closeMobileMenu = function() {
+                overlay.classList.remove('active');
+                panel.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            };
+
+            // Highlight active page in mobile menu
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.mobile-menu-card').forEach(card => {
+                if (card.dataset.page === currentPage) {
+                    card.classList.add('active');
+                }
+            });
+
+            // Swipe to close
+            panel.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+            }, { passive: true });
+
+            panel.addEventListener('touchmove', function(e) {
+                touchCurrentX = e.touches[0].clientX;
+                const diff = touchCurrentX - touchStartX;
+                if (diff < -50) {
+                    panel.style.transform = 'translateX(' + diff + 'px)';
+                }
+            }, { passive: true });
+
+            panel.addEventListener('touchend', function(e) {
+                const diff = touchCurrentX - touchStartX;
+                if (diff < -80) {
+                    closeMobileMenu();
+                }
+                panel.style.transform = '';
+                touchStartX = 0;
+                touchCurrentX = 0;
+            }, { passive: true });
+
+            // Back button closes menu
+            window.addEventListener('popstate', function() {
+                if (panel.classList.contains('active')) {
+                    closeMobileMenu();
+                    history.pushState(null, '');
+                }
+            });
+
+            // Escape key closes menu
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && panel.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+        })();
+    </script>
+
 </body>
 </html>
