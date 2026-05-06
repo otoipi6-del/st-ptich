@@ -4,421 +4,137 @@
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СТ ПТИЧЬ</title>
+    <title>Документы — СТ ПТИЧЬ</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .logo-avatar {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            border-radius: 50%;
+        .doc-card {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid #2d7a3e;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .doc-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(4px);
+        }
+        .doc-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            font-weight: 800;
-            color: var(--dark);
-            margin: 0 auto 20px;
-            box-shadow: 0 4px 20px rgba(232, 185, 35, 0.4);
-            border: 4px solid rgba(255,255,255,0.3);
+            font-size: 28px;
+            flex-shrink: 0;
+            color: white;
         }
-        .viber-link {
+        .doc-icon.ustav {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .doc-icon.protocol {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+        }
+        .doc-info {
+            flex: 1;
+        }
+        .doc-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 6px;
+        }
+        .doc-info p {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .doc-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .doc-actions a {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: #7360f2;
-            text-decoration: none;
-            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
             font-size: 14px;
-            margin-top: 4px;
-        }
-        .viber-link:hover {
-            text-decoration: underline;
-        }
-        .phone-link {
-            color: var(--primary);
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 600;
+            transition: var(--transition);
         }
-        .phone-link:hover {
-            text-decoration: underline;
-        }
-        .staff-card {
-            background: var(--white);
-            border-radius: var(--radius-md);
-            padding: 24px;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--primary);
-        }
-        .staff-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 8px;
-        }
-        .staff-card .role {
-            display: inline-block;
+        .btn-view {
             background: var(--primary);
-            color: var(--white);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
+            color: white;
         }
-        .staff-card p {
-            margin-bottom: 6px;
-            font-size: 15px;
+        .btn-view:hover {
+            background: var(--primary-dark);
         }
-        .member-list {
-            list-style: none;
-            padding: 0;
-        }
-        .member-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--gray-100);
-            font-size: 16px;
+        .btn-download {
+            background: var(--gray-100);
             color: var(--gray-700);
+            border: 1px solid var(--gray-300);
         }
-        .member-list li::before {
-            content: '🔸';
-            margin-right: 8px;
+        .btn-download:hover {
+            background: var(--gray-300);
         }
-        .erip-box {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        .pdf-viewer {
+            width: 100%;
+            height: 700px;
+            border: none;
             border-radius: var(--radius-md);
-            padding: 24px;
+            box-shadow: var(--shadow-md);
             margin-top: 20px;
-            border: 2px solid var(--primary-light);
         }
-        .erip-box h4 {
-            color: var(--primary-dark);
+        .pdf-section {
+            display: none;
+            margin-top: 30px;
+        }
+        .pdf-section.active {
+            display: block;
+        }
+        .pdf-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 16px;
-            font-size: 20px;
-        }
-        .erip-step {
-            display: flex;
-            align-items: flex-start;
+            flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 12px;
-            font-size: 15px;
         }
-        .erip-step .num {
-            width: 28px;
-            height: 28px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-        .price-highlight {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: white;
-            padding: 16px 24px;
-            border-radius: var(--radius-md);
-            font-size: 18px;
-            font-weight: 700;
-            margin: 12px 0;
-            display: inline-block;
-        }
-        .warning-box {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 16px 20px;
-            border-radius: var(--radius-sm);
-            margin: 16px 0;
-        }
-        .warning-box strong {
-            color: #856404;
-        }
-        .danger-box {
-            background: #f8d7da;
-            border-left: 4px solid #dc3545;
-            padding: 16px 20px;
-            border-radius: var(--radius-sm);
-            margin: 16px 0;
-        }
-        .danger-box strong {
-            color: #721c24;
-        }
-
-        /* ===== ЦВЕТНЫЕ КАРТОЧКИ РАЗДЕЛОВ ===== */
-        .cards-grid-priority {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: var(--radius-md);
-            padding: 32px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--gray-100);
-            transition: var(--transition);
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 5px;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card:hover::before {
-            width: 8px;
-        }
-
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            margin-bottom: 20px;
-            color: var(--white);
-        }
-
-        .card-icon svg {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
-        }
-
-        .card h3 {
+        .pdf-header h3 {
             font-size: 20px;
             font-weight: 700;
-            margin-bottom: 10px;
             color: var(--gray-900);
         }
-
-        .card p {
-            font-size: 15px;
-            color: var(--gray-500);
-            line-height: 1.6;
-            flex-grow: 1;
-        }
-
-        .card-arrow {
-            margin-top: 20px;
+        .btn-close {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
             font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Цветовые варианты карточек */
-        .card-green {
-            background: linear-gradient(135deg, #f0f9f2, #e0f2e4);
-            border-color: #c8e6c9;
-        }
-        .card-green::before { background: #2d7a3e; }
-        .card-green .card-icon { background: linear-gradient(135deg, #2d7a3e, #1e5a2a); }
-        .card-green .card-arrow { color: #2d7a3e; }
-        .card-green:hover { border-color: #2d7a3e; }
-
-        .card-blue {
-            background: linear-gradient(135deg, #f0f5ff, #e0ebff);
-            border-color: #b3d1ff;
-        }
-        .card-blue::before { background: #2563eb; }
-        .card-blue .card-icon { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-        .card-blue .card-arrow { color: #2563eb; }
-        .card-blue:hover { border-color: #2563eb; }
-
-        .card-orange {
-            background: linear-gradient(135deg, #fff7ed, #ffedd5);
-            border-color: #fdba74;
-        }
-        .card-orange::before { background: #ea580c; }
-        .card-orange .card-icon { background: linear-gradient(135deg, #ea580c, #c2410c); }
-        .card-orange .card-arrow { color: #ea580c; }
-        .card-orange:hover { border-color: #ea580c; }
-
-        .card-purple {
-            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
-            border-color: #d8b4fe;
-        }
-        .card-purple::before { background: #9333ea; }
-        .card-purple .card-icon { background: linear-gradient(135deg, #9333ea, #7e22ce); }
-        .card-purple .card-arrow { color: #9333ea; }
-        .card-purple:hover { border-color: #9333ea; }
-
-        .card-teal {
-            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
-            border-color: #5eead4;
-        }
-        .card-teal::before { background: #0d9488; }
-        .card-teal .card-icon { background: linear-gradient(135deg, #0d9488, #0f766e); }
-        .card-teal .card-arrow { color: #0d9488; }
-        .card-teal:hover { border-color: #0d9488; }
-
-        .card-red {
-            background: linear-gradient(135deg, #fef2f2, #fee2e2);
-            border-color: #fca5a5;
-        }
-        .card-red::before { background: #dc2626; }
-        .card-red .card-icon { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-        .card-red .card-arrow { color: #dc2626; }
-        .card-red:hover { border-color: #dc2626; }
-
-        .card-indigo {
-            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
-            border-color: #a5b4fc;
-        }
-        .card-indigo::before { background: #4f46e5; }
-        .card-indigo .card-icon { background: linear-gradient(135deg, #4f46e5, #4338ca); }
-        .card-indigo .card-arrow { color: #4f46e5; }
-        .card-indigo:hover { border-color: #4f46e5; }
-
-        .card-amber {
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            border-color: #fcd34d;
-        }
-        .card-amber::before { background: #d97706; }
-        .card-amber .card-icon { background: linear-gradient(135deg, #d97706, #b45309); }
-        .card-amber .card-arrow { color: #d97706; }
-        .card-amber:hover { border-color: #d97706; }
-
-        /* ===== BACKGROUND SLIDER ===== */
-        .hero-main {
-            position: relative;
-            overflow: hidden;
-            min-height: 420px;
-            padding: 40px 20px 50px;
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
-        }
-        .hero-slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            min-height: 420px;
-            z-index: 0;
-        }
-        .hero-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            min-height: 420px;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            will-change: opacity;
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-        }
-        .hero-slide.active {
-            opacity: 1;
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.35) 100%);
-            z-index: 1;
-        }
-        .hero-main-content {
-            position: relative;
-            z-index: 2;
-            padding: 20px 0;
-        }
-        .hero-main-content img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 12px;
-        }
-        .hero-main-content h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-        .hero-main-content .subtitle {
-            font-size: 15px;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-        .hero-buttons .btn {
-            padding: 10px 20px;
-            font-size: 14px;
-        }
-        /* Slider dots */
-        .slider-dots {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 3;
-        }
-        .slider-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.4);
-            border: 2px solid rgba(255,255,255,0.6);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
-        .slider-dot.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            transform: scale(1.2);
+        .btn-close:hover {
+            background: var(--gray-300);
         }
-        .slider-dot:hover {
-            background: rgba(255,255,255,0.7);
-        }
-
-        @media (max-width: 480px) {
-            .hero-main {
-                min-height: 360px;
-                padding: 30px 16px 40px;
+        @media (max-width: 768px) {
+            .doc-card {
+                flex-direction: column;
+                align-items: flex-start;
             }
-            .hero-main-content h1 {
-                font-size: 26px;
-            }
-            .hero-main-content .subtitle {
-                font-size: 14px;
+            .pdf-viewer {
+                height: 400px;
             }
         }
     </style>
@@ -434,19 +150,46 @@
                 white-space: nowrap;
             }
         </style>
-
+    
 <style>
         .footer-nav a { color: var(--gray-300); text-decoration: underline; margin: 0 10px; font-size: 14px; transition: var(--transition); }
         .footer-nav a:hover { color: var(--accent); }
         .footer-nav a.active { color: var(--accent); font-weight: 700; }
         .footer-nav a.active::before { content: '▸ '; }
     </style>
+    <style>
+        /* Фоновое изображение для шапки */
+        body .hero {
+            position: relative !important;
+            overflow: hidden !important;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.35) 100%),
+                        url('images/ber.jpg') center/cover no-repeat !important;
+            z-index: 0;
+        }
+        body .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        body .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
     <!-- Search Bar -->
 </div>
 
-    <!-- Header -->
+    <!-- Breadcrumbs -->
+    </div>
+
     <header class="header">
         <div class="header-top">
             <a href="index.html" class="logo">
@@ -461,112 +204,90 @@
         <nav class="nav">
             <div class="nav-inner">
                 <ul class="nav-list">
-                    <li><a href="index.html" class="active">Главная</a></li>
+                    <li><a href="index.html">Главная</a></li>
                     <li><a href="about.html">О Товариществе</a></li>
                     <li><a href="tarify.html">Тарифы</a></li>
                     <li><a href="karta.html">Карта</a></li>
                     <li><a href="sluzhby.html">Службы</a></li>
                     <li><a href="pravlenie.html">Правление</a></li>
-                    <li><a href="dokumenty.html">Документы</a></li>
+                    <li><a href="dokumenty.html" class="active">Документы</a></li>
                     </ul>
             </div>
         </nav>
     </header>
 
-    <!-- Hero Main with Background Slider -->
-    <section class="hero-main">
-        <div class="hero-slider">
-            <div class="hero-slide active" style="background-image: url('images/ber.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('images/ozero.jpg');"></div>
-            <div class="hero-slide" style="background-image: url('images/moln.jpg');"></div>
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="slider-dots">
-            <span class="slider-dot active" onclick="goToSlide(0)"></span>
-            <span class="slider-dot" onclick="goToSlide(1)"></span>
-            <span class="slider-dot" onclick="goToSlide(2)"></span>
-        </div>
-        <div class="hero-main-content">
-            <img src="images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3); margin-bottom: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);"><h1>СТ ПТИЧЬ</h1>
-            <p class="subtitle">Садовое товарищество. Ваш уголок природы, комфорта и добрососедства</p>
-            <div class="hero-buttons">
-                <a href="pravlenie.html" class="btn btn-primary">Связаться с Правлением</a>
-                <a href="tarify.html" class="btn btn-outline">Тарифы и платежи</a>
-            </div>
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>Документы</h1>
+            <p>Устав, протоколы, сметы и другие документы СТ ПТИЧЬ</p>
         </div>
     </section>
 
-    <!-- Quick Links Cards -->
     <section class="section">
-        <div class="section-header">
-            <h2>Разделы сайта</h2>
-            <p>Вся важная информация о жизни товарищества в одном месте</p>
-        </div>
-        <div class="cards-grid-priority">
-            <a href="about.html" class="card card-green">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
-                </div>
-                <h3>О Товариществе</h3>
-                <p>Общие сведения, инфраструктура и организация жизни СТ ПТИЧЬ</p>
-                <span class="card-arrow">Подробнее →</span>
-            </a>
-            <a href="tarify.html" class="card card-blue">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
-                </div>
-                <h3>Тарифы, платежи, реквизиты</h3>
-                <p>Размеры членских взносов, целевые сборы, реквизиты для оплаты</p>
-                <span class="card-arrow">Подробнее →</span>
-            </a>
-            <a href="karta.html" class="card card-orange">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M20.5 3l-6 3-6-3-5 2.5v15l5-2.5 6 3 6-3 5 2.5v-15l-5-2.5zm-6 14.5l-6-3v-9l6 3v9zm8-9v9l-5-2.5v-9l5 2.5z"/></svg>
-                </div>
-                <h3>Карта и координаты</h3>
-                <p>Расположение СТ ПТИЧЬ на карте, GPS-координаты, схема проезда</p>
-                <span class="card-arrow">Подробнее →</span>
-            </a>
-            <a href="sluzhby.html" class="card card-purple">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                </div>
-                <h3>Аварийные и другие службы</h3>
-                <p>Телефоны полиции, скорой помощи, пожарных, электрика, водоснабжения</p>
-                <span class="card-arrow">Подробнее →</span>
-            </a>
-            <a href="pravlenie.html" class="card card-teal">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                </div>
-                <h3>Правление и штат</h3>
-                <p>Контакты председателя, бухгалтера, электрика и членов правления СТ ПТИЧЬ</p>
-                <span class="card-arrow">Подробнее →</span>
-            </a>
-            <a href="dokumenty.html" class="card card-red">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
-                </div>
-                <h3>Документы</h3>
-                <p>Устав, протоколы собраний, сметы, договора — для скачивания в PDF</p>
-                <span class="card-arrow">Подробнее →</span>
-            </a>
+        <div style="max-width: 900px; margin: 0 auto;">
 
+            <!-- Устав СТ ПТИЧЬ -->
+            <div class="doc-card">
+                <div class="doc-icon ustav">📄</div>
+                <div class="doc-info">
+                    <h3>Устав СТ ПТИЧЬ</h3>
+                    <p>Утверждён протоколом Общего собрания членов СТ ПТИЧЬ д. Заболотье №2 от 1 сентября 2010 г. Зарегистрирован решением Минского районного исполнительного комитета.</p>
+                    <div class="doc-actions">
+                        <a href="#" class="btn-view" onclick="showPdf(); return false;">👁️ Просмотреть</a>
+                        <a href="documents/ustav-st-ptich.pdf" class="btn-download" download>⬇️ Скачать PDF</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PDF Viewer Section -->
+            <div class="pdf-section" id="pdfSection">
+                <div class="pdf-header">
+                    <h3>📄 Устав СТ ПТИЧЬ</h3>
+                    <button class="btn-close" onclick="hidePdf()">✕ Закрыть просмотр</button>
+                </div>
+                <embed class="pdf-viewer" src="documents/ustav-st-ptich.pdf" type="application/pdf">
+                <p style="text-align: center; margin-top: 12px; font-size: 13px; color: var(--gray-500);">
+                    Если документ не отображается, <a href="documents/ustav-st-ptich.pdf" download style="color: var(--primary);">скачайте PDF</a> или откройте в отдельной вкладке.
+                </p>
+            </div>
+
+            <!-- Протоколы общих собраний -->
+            <div class="doc-card">
+                <div class="doc-icon protocol">📋</div>
+                <div class="doc-info">
+                    <h3>Протоколы общих собраний</h3>
+                    <p>Протоколы общих собраний членов СТ ПТИЧЬ. Включают решения по членским взносам, благоустройству, электроснабжению и другим вопросам.</p>
+                    <div class="doc-actions">
+                        <a href="protokoly.html" class="btn-view">👁️ Открыть протоколы</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правила чата СТ ПТИЧЬ -->
+            <div class="doc-card">
+                <div class="doc-icon protocol">💬</div>
+                <div class="doc-info">
+                    <h3>Правила чата СТ ПТИЧЬ</h3>
+                    <p>Правила поведения и общения в групповом чате членов СТ ПТИЧЬ.</p>
+                    <div class="doc-actions">
+                        <a href="pravila-chata.html" class="btn-view">👁️ Просмотреть</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </section>
 
-    <!-- Footer -->
             <footer class="footer">
         <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
             <div class="footer-nav" style="margin-bottom:16px;">
-                <a href="index.html" class="active">Главная</a>
+                <a href="index.html">Главная</a>
                 <a href="about.html">О Товариществе</a>
                 <a href="tarify.html">Тарифы</a>
                 <a href="karta.html">Карта</a>
                 <a href="sluzhby.html">Службы</a>
                 <a href="pravlenie.html">Правление</a>
-                <a href="dokumenty.html">Документы</a>
+                <a href="dokumenty.html" class="active">Документы</a>
             </div>
             <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
                 <span>Информационный сайт</span>
@@ -580,61 +301,14 @@
     </footer>
 
     <script>
-        // Background image slider
-        (function() {
-            let currentSlide = 0;
-            const slides = document.querySelectorAll('.hero-slide');
-            const dots = document.querySelectorAll('.slider-dot');
-            const totalSlides = slides.length;
-            let slideInterval;
-            let imagesLoaded = 0;
-
-            // Preload images to ensure they display
-            slides.forEach((slide) => {
-                const url = slide.style.backgroundImage.slice(4, -1).replace(/["']/g, "");
-                if (url) {
-                    const img = new Image();
-                    img.onload = function() {
-                        imagesLoaded++;
-                        slide.style.backgroundImage = "url('" + url + "')";
-                    };
-                    img.onerror = function() {
-                        // If image fails, remove it so fallback gradient shows
-                        slide.style.display = 'none';
-                    };
-                    img.src = url;
-                }
-            });
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('active', i === index);
-                });
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                });
-                currentSlide = index;
-            }
-
-            function nextSlide() {
-                const next = (currentSlide + 1) % totalSlides;
-                showSlide(next);
-            }
-
-            window.goToSlide = function(index) {
-                clearInterval(slideInterval);
-                showSlide(index);
-                startSlider();
-            };
-
-            function startSlider() {
-                slideInterval = setInterval(nextSlide, 5000);
-            }
-
-            // Start after a short delay to let images begin loading
-            setTimeout(startSlider, 100);
-        })();
-    </script>
+        function showPdf() {
+            document.getElementById('pdfSection').classList.add('active');
+            document.getElementById('pdfSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        function hidePdf() {
+            document.getElementById('pdfSection').classList.remove('active');
+        }
+</script>
 
     <script>
         (function() {
