@@ -480,9 +480,8 @@
                     <li><a href="tarify.html">Тарифы</a></li>
                     <li><a href="karta.html">Карта</a></li>
                     <li><a href="kontakty.html">Контакты</a></li>
-                    
                     <li><a href="dokumenty.html">Документы</a></li>
-                    </ul>
+                </ul>
             </div>
         </nav>
     </header>
@@ -532,7 +531,6 @@
                 </div>
                 <span class="mmc-text">Контакты</span>
             </a>
-
             <a href="dokumenty.html" class="mobile-menu-card mmc-indigo" data-page="dokumenty.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -647,7 +645,6 @@
                 <a href="tarify.html">Тарифы</a>
                 <a href="karta.html">Карта</a>
                 <a href="kontakty.html">Контакты</a>
-                
                 <a href="dokumenty.html">Документы</a>
             </div>
             <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
@@ -726,6 +723,63 @@
                 }
             });
         })();
+    </script>
+
+    <!-- ===== SWIPE NAVIGATION ===== -->
+    <script>
+    (function() {
+        var isMobile = function() {
+            return window.innerWidth <= 768 || 
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        };
+        if (!isMobile()) return;
+
+        var prevPage = 'dokumenty.html';
+        var nextPage = 'dokumenty.html';
+
+        var startX = 0, startY = 0, startTime = 0;
+        var SWIPE_THRESHOLD = 60;
+        var MAX_VERTICAL = 100;
+        var MAX_DURATION = 400;
+
+        document.addEventListener('touchstart', function(e) {
+            var t = e.touches[0];
+            startX = t.clientX;
+            startY = t.clientY;
+            startTime = Date.now();
+        }, { passive: true });
+
+        document.addEventListener('touchend', function(e) {
+            var t = e.changedTouches[0];
+            var dx = t.clientX - startX;
+            var dy = t.clientY - startY;
+            var dt = Date.now() - startTime;
+
+            if (dt > MAX_DURATION || Math.abs(dy) > MAX_VERTICAL || Math.abs(dx) < SWIPE_THRESHOLD) return;
+
+            var target = e.target;
+            while (target && target !== document.body) {
+                var style = window.getComputedStyle(target);
+                var overflow = style.overflow + style.overflowX + style.overflowY;
+                if (overflow.includes('scroll') || overflow.includes('auto')) {
+                    if (target.scrollWidth > target.clientWidth) return;
+                }
+                target = target.parentElement;
+            }
+
+            var panel = document.getElementById('mobileMenuPanel');
+            if (panel && panel.classList.contains('active')) return;
+
+            var pdfModal = document.getElementById('pdfModal');
+            if (pdfModal && pdfModal.classList.contains('active')) return;
+
+            if (dx < 0) {
+                window.location.href = nextPage;
+            } else {
+                window.location.href = prevPage;
+            }
+        }, { passive: true });
+    })();
     </script>
 </body>
 </html>
