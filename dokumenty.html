@@ -1021,6 +1021,8 @@
 
         document.addEventListener('touchstart', function(e) {
             if (isNavigating) return;
+            // Don't intercept touches on menu toggle button
+            if (e.target.closest('.menu-toggle')) return;
             var t = e.touches[0];
             startX = t.clientX;
             startY = t.clientY;
