@@ -111,11 +111,6 @@
         body .hero-content {
             position: relative;
             z-index: 2;
-            color: white !important;
-        }
-        body .hero-content h1,
-        body .hero-content p {
-            color: white !important;
         }
     </style>
     <style>
@@ -398,7 +393,8 @@
                     <li><a href="about.html">О Товариществе</a></li>
                     <li><a href="tarify.html">Тарифы</a></li>
                     <li><a href="karta.html">Карта</a></li>
-                    <li><a href="kontakty.html">Контакты</a></li>
+                    <li><a href="sluzhby.html">Службы</a></li>
+                    <li><a href="pravlenie.html">Правление</a></li>
                     <li><a href="dokumenty.html">Документы</a></li>
                 </ul>
             </div>
@@ -445,11 +441,17 @@
                 </div>
                 <span class="mmc-text">Карта</span>
             </a>
-            <a href="kontakty.html" class="mobile-menu-card mmc-teal" data-page="kontakty.html">
+            <a href="sluzhby.html" class="mobile-menu-card mmc-teal" data-page="sluzhby.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                </div>
+                <span class="mmc-text">Службы</span>
+            </a>
+            <a href="pravlenie.html" class="mobile-menu-card mmc-red" data-page="pravlenie.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 </div>
-                <span class="mmc-text">Контакты</span>
+                <span class="mmc-text">Правление</span>
             </a>
             <a href="dokumenty.html" class="mobile-menu-card mmc-indigo" data-page="dokumenty.html">
                 <div class="mmc-icon">
@@ -500,7 +502,7 @@
         <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
             <div class="footer-nav" style="margin-bottom:16px;">
                 <a href="index.html">Главная</a>
-                <a href="about.html">О Товариществе</a>
+                <a href="about.html" class="active">О Товариществе</a>
                 <a href="tarify.html">Тарифы</a>
                 <a href="karta.html">Карта</a>
                 <a href="kontakty.html">Контакты</a>
@@ -508,10 +510,11 @@
             </div>
             <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
                 <span>Информационный сайт</span>
+                <span style="margin:0 20px;"></span>
+                <a href="kontakty.html" style="color:var(--gray-300); text-decoration:underline; font-weight:600;">Контакты</a>
             </div>
             <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
-                <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество.<br>
-                © Все права защищены. 2026 г.
+                © <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество. Все права защищены. 2026 г.
             </div>
         </div>
     </footer>
@@ -585,63 +588,6 @@
                 }
             });
         })();
-    </script>
-
-    <!-- ===== SWIPE NAVIGATION ===== -->
-    <script>
-    (function() {
-        var isMobile = function() {
-            return window.innerWidth <= 768 || 
-                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        };
-        if (!isMobile()) return;
-
-        var prevPage = 'about.html';
-        var nextPage = 'about.html';
-
-        var startX = 0, startY = 0, startTime = 0;
-        var SWIPE_THRESHOLD = 60;
-        var MAX_VERTICAL = 100;
-        var MAX_DURATION = 400;
-
-        document.addEventListener('touchstart', function(e) {
-            var t = e.touches[0];
-            startX = t.clientX;
-            startY = t.clientY;
-            startTime = Date.now();
-        }, { passive: true });
-
-        document.addEventListener('touchend', function(e) {
-            var t = e.changedTouches[0];
-            var dx = t.clientX - startX;
-            var dy = t.clientY - startY;
-            var dt = Date.now() - startTime;
-
-            if (dt > MAX_DURATION || Math.abs(dy) > MAX_VERTICAL || Math.abs(dx) < SWIPE_THRESHOLD) return;
-
-            var target = e.target;
-            while (target && target !== document.body) {
-                var style = window.getComputedStyle(target);
-                var overflow = style.overflow + style.overflowX + style.overflowY;
-                if (overflow.includes('scroll') || overflow.includes('auto')) {
-                    if (target.scrollWidth > target.clientWidth) return;
-                }
-                target = target.parentElement;
-            }
-
-            var panel = document.getElementById('mobileMenuPanel');
-            if (panel && panel.classList.contains('active')) return;
-
-            var pdfModal = document.getElementById('pdfModal');
-            if (pdfModal && pdfModal.classList.contains('active')) return;
-
-            if (dx < 0) {
-                window.location.href = nextPage;
-            } else {
-                window.location.href = prevPage;
-            }
-        }, { passive: true });
-    })();
     </script>
 </body>
 </html>
