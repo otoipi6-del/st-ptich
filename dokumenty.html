@@ -1057,14 +1057,6 @@
                 if (isMenuOpen()) return;
                 if (isPdfModalOpen()) return;
 
-                var screenWidth = window.innerWidth;
-                var edgeZone = screenWidth * 0.15;
-                var fromLeftEdge = startX < edgeZone;
-                var fromRightEdge = startX > (screenWidth - edgeZone);
-
-                if (dx < 0 && !fromLeftEdge) return;
-                if (dx > 0 && !fromRightEdge) return;
-
                 isDragging = true;
                 wrapper.classList.add('dragging');
             }
