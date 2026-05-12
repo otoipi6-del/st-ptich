@@ -359,6 +359,7 @@
         @media (max-width: 768px) {
             .nav { display: none !important; }
             .menu-toggle {
+                touch-action: manipulation;
                 display: flex !important;
                 align-items: center;
                 justify-content: center;
@@ -478,26 +479,6 @@
     </style>
 </head>
 <body>
-    <script>
-    // Prevent swipe script from intercepting menu toggle touches
-    (function() {
-        document.addEventListener('DOMContentLoaded', function() {
-            var menuToggle = document.querySelector('.menu-toggle');
-            if (menuToggle) {
-                menuToggle.addEventListener('touchstart', function(e) {
-                    e.stopPropagation();
-                }, { passive: true });
-                menuToggle.addEventListener('touchmove', function(e) {
-                    e.stopPropagation();
-                }, { passive: true });
-                menuToggle.addEventListener('touchend', function(e) {
-                    e.stopPropagation();
-                    openMobileMenu();
-                }, { passive: true });
-            }
-        });
-    })();
-    </script>
     <div class="page-wrapper" id="pageWrapper">
 
     <header class="header">
@@ -685,6 +666,31 @@
     <div class="drag-indicator left" id="dragIndicatorLeft">‹</div>
     <div class="drag-indicator right" id="dragIndicatorRight">›</div>
     <div class="page-dim" id="pageDim"></div>
+
+        <!-- Menu toggle isolation -->
+    <script>
+    (function() {
+        function attachMenuToggle() {
+            var btn = document.querySelector('.menu-toggle');
+            if (!btn) return;
+            btn.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            btn.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+            }, { passive: true });
+            btn.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+                openMobileMenu();
+            }, { passive: true });
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', attachMenuToggle);
+        } else {
+            attachMenuToggle();
+        }
+    })();
+    </script>
 
     <!-- ===== ADVANCED SWIPE NAVIGATION WITH DRAG EFFECT ===== -->
     <script>
