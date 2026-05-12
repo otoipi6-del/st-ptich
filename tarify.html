@@ -739,31 +739,6 @@
     <div class="drag-indicator right" id="dragIndicatorRight">›</div>
     <div class="page-dim" id="pageDim"></div>
 
-        <!-- Menu toggle isolation -->
-    <script>
-    (function() {
-        function attachMenuToggle() {
-            var btn = document.querySelector('.menu-toggle');
-            if (!btn) return;
-            btn.addEventListener('touchstart', function(e) {
-                e.stopPropagation();
-            }, { passive: true });
-            btn.addEventListener('touchmove', function(e) {
-                e.stopPropagation();
-            }, { passive: true });
-            btn.addEventListener('touchend', function(e) {
-                e.stopPropagation();
-                openMobileMenu();
-            }, { passive: true });
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', attachMenuToggle);
-        } else {
-            attachMenuToggle();
-        }
-    })();
-    </script>
-
     <!-- ===== ADVANCED SWIPE NAVIGATION WITH DRAG EFFECT ===== -->
     <script>
     (function() {
@@ -910,9 +885,7 @@
         }, { passive: true });
 
         document.addEventListener('touchmove', function(e) {
-            if (isNavigating) return;
-            // Ignore if touch started on menu toggle
-            if (touchStartedOnMenu) return;
+            if (isNavigating || touchStartedOnMenu) return;
             var t = e.touches[0];
             currentX = t.clientX;
             currentY = t.clientY;
@@ -925,43 +898,17 @@
             if (!dragDirection && (absDx > 8 || absDy > 8)) {
                 if (absDx > absDy && absDx > 8) {
                     dragDirection = 'horizontal';
+                    // Prevent scroll when horizontal drag detected
+                    if (e.cancelable) e.preventDefault();
                 } else {
                     dragDirection = 'vertical';
                 }
             }
 
-            if (dragDirection !== 'horizontal') return;
-
-            if (!isDragging) {
-                if (isInteractive(e.target)) return;
-                if (isInScrollable(e.target)) return;
-                if (isMenuOpen()) return;
-                if (isPdfModalOpen()) return;
-
-                isDragging = true;
-                wrapper.classList.add('dragging');
+            if (dragDirection === 'horizontal' && e.cancelable) {
+                e.preventDefault();
             }
-
-            if (!isDragging) return;
-
-            var screenWidth = window.innerWidth;
-            var resistance = 0.6;
-            var translateX = dx * resistance;
-
-            wrapper.style.transform = 'translateX(' + translateX + 'px)';
-
-            var dimOpacity = Math.min(Math.abs(translateX) / (screenWidth * 0.5), 0.3);
-            pageDim.style.background = 'rgba(0,0,0,' + dimOpacity + ')';
-            pageDim.classList.add('visible');
-
-            if (dx < 0) {
-                indicatorRight.classList.add('visible');
-                indicatorLeft.classList.remove('visible');
-            } else {
-                indicatorLeft.classList.add('visible');
-                indicatorRight.classList.remove('visible');
-            }
-        }, { passive: true });
+        }, { passive: false });
 
         document.addEventListener('touchend', function(e) {
             // Reset menu flag
