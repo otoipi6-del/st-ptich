@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/images/logo.jpg">
     <title>Протоколы общих собраний — СТ ПТИЧЬ</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/css/style.css">
@@ -131,6 +131,107 @@
         }
         .back-link:hover {
             text-decoration: underline;
+        }
+    </style>
+<style>
+        /* ===== SWIPE SYSTEM ===== */
+        html, body {
+            overflow-x: hidden;
+            touch-action: pan-y;
+            overscroll-behavior-x: none;
+        }
+        .page-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            will-change: transform;
+        }
+        .page-wrapper.dragging {
+            transition: none !important;
+        }
+        .page-wrapper.sliding-out-left {
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+            transform: translateX(-100%) !important;
+        }
+        .page-wrapper.sliding-out-right {
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+            transform: translateX(100%) !important;
+        }
+        .page-wrapper.returning {
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            transform: translateX(0) !important;
+        }
+        .page-incoming {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0;
+            background: var(--bg, #f5f7fa);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .page-incoming.active {
+            pointer-events: auto;
+        }
+        .page-incoming.from-right {
+            transform: translateX(100%);
+        }
+        .page-incoming.from-left {
+            transform: translateX(-100%);
+        }
+        .page-incoming.animating-in {
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.35s ease;
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .page-incoming.animating-out {
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.35s ease;
+            opacity: 0;
+        }
+        .drag-indicator {
+            position: fixed;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            z-index: 9997;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
+        .drag-indicator.visible {
+            opacity: 1;
+        }
+        .drag-indicator.left {
+            left: 12px;
+        }
+        .drag-indicator.right {
+            right: 12px;
+        }
+        .page-dim {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0);
+            z-index: 9996;
+            pointer-events: none;
+            transition: background 0.1s ease;
+        }
+        .page-dim.visible {
+            background: rgba(0,0,0,0.15);
         }
     </style>
 
@@ -455,6 +556,7 @@
     </style>
 </head>
 <body>
+    <div class="page-wrapper" id="pageWrapper">
     <!-- Search Bar -->
 </div>
 
@@ -463,7 +565,7 @@
 
     <header class="header">
         <div class="header-top">
-            <a href="index.html" class="logo">
+            <a href="index.html" data-nav="index.html" class="logo">
                 <img src="https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
                 <div class="logo-text">
                     ПТИЧЬ
@@ -475,12 +577,12 @@
         <nav class="nav">
             <div class="nav-inner">
                 <ul class="nav-list">
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="about.html">О Товариществе</a></li>
-                    <li><a href="tarify.html">Тарифы</a></li>
-                    <li><a href="karta.html">Карта</a></li>
-                    <li><a href="kontakty.html">Контакты</a></li>
-                    <li><a href="dokumenty.html">Документы</a></li>
+                    <li><a href="index.html" data-nav="index.html">Главная</a></li>
+                    <li><a href="about.html" data-nav="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html" data-nav="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html" data-nav="karta.html">Карта</a></li>
+                    <li><a href="kontakty.html" data-nav="kontakty.html">Контакты</a></li>
+                    <li><a href="dokumenty.html" data-nav="dokumenty.html">Документы</a></li>
                 </ul>
             </div>
         </nav>
@@ -501,37 +603,37 @@
             <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Закрыть меню">✕</button>
         </div>
         <nav class="mobile-menu-cards">
-            <a href="index.html" class="mobile-menu-card mmc-green" data-page="index.html">
+            <a href="index.html" data-nav="index.html" class="mobile-menu-card mmc-green" data-page="index.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
                 </div>
                 <span class="mmc-text">Главная</span>
             </a>
-            <a href="about.html" class="mobile-menu-card mmc-blue" data-page="about.html">
+            <a href="about.html" data-nav="about.html" class="mobile-menu-card mmc-blue" data-page="about.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                 </div>
                 <span class="mmc-text">О Товариществе</span>
             </a>
-            <a href="tarify.html" class="mobile-menu-card mmc-orange" data-page="tarify.html">
+            <a href="tarify.html" data-nav="tarify.html" class="mobile-menu-card mmc-orange" data-page="tarify.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
                 </div>
                 <span class="mmc-text">Тарифы</span>
             </a>
-            <a href="karta.html" class="mobile-menu-card mmc-purple" data-page="karta.html">
+            <a href="karta.html" data-nav="karta.html" class="mobile-menu-card mmc-purple" data-page="karta.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M20.5 3l-6 3-6-3-5 2.5v15l5-2.5 6 3 6-3 5 2.5v-15l-5-2.5zm-6 14.5l-6-3v-9l6 3v9zm8-9v9l-5-2.5v-9l5 2.5z"/></svg>
                 </div>
                 <span class="mmc-text">Карта</span>
             </a>
-            <a href="kontakty.html" class="mobile-menu-card mmc-teal" data-page="kontakty.html">
+            <a href="kontakty.html" data-nav="kontakty.html" class="mobile-menu-card mmc-teal" data-page="kontakty.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 </div>
                 <span class="mmc-text">Контакты</span>
             </a>
-            <a href="dokumenty.html" class="mobile-menu-card mmc-indigo" data-page="dokumenty.html">
+            <a href="dokumenty.html" data-nav="dokumenty.html" class="mobile-menu-card mmc-indigo" data-page="dokumenty.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                 </div>
@@ -632,7 +734,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 40px;">
-                <a href="dokumenty.html" class="back-link">← Вернуться к Документы</a>
+                <a href="dokumenty.html" data-nav="dokumenty.html" class="back-link">← Вернуться к Документы</a>
             </div>
         </div>
     </section>
@@ -640,12 +742,12 @@
             <footer class="footer">
         <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
             <div class="footer-nav" style="margin-bottom:16px;">
-                <a href="index.html">Главная</a>
-                <a href="about.html">О Товариществе</a>
-                <a href="tarify.html">Тарифы</a>
-                <a href="karta.html">Карта</a>
-                <a href="kontakty.html">Контакты</a>
-                <a href="dokumenty.html">Документы</a>
+                <a href="index.html" data-nav="index.html">Главная</a>
+                <a href="about.html" data-nav="about.html">О Товариществе</a>
+                <a href="tarify.html" data-nav="tarify.html">Тарифы</a>
+                <a href="karta.html" data-nav="karta.html">Карта</a>
+                <a href="kontakty.html" data-nav="kontakty.html">Контакты</a>
+                <a href="dokumenty.html" data-nav="dokumenty.html">Документы</a>
             </div>
             <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
                 <span>Информационный сайт</span>
@@ -725,61 +827,247 @@
         })();
     </script>
 
-    <!-- ===== SWIPE NAVIGATION ===== -->
+    <!-- ===== ADVANCED SWIPE NAVIGATION WITH DRAG EFFECT ===== -->
     <script>
     (function() {
-        var isMobile = function() {
-            return window.innerWidth <= 768 || 
-                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        };
-        if (!isMobile()) return;
+        var pages = ['index.html','about.html','tarify.html','karta.html','kontakty.html','dokumenty.html'];
+        var current = window.location.pathname.split('/').pop() || 'index.html';
+        var idx = pages.indexOf(current);
+        if (idx === -1) idx = 0;
 
-        var prevPage = 'dokumenty.html';
-        var nextPage = 'dokumenty.html';
+        var isNavigating = false;
+        var startX = 0, startY = 0, currentX = 0, currentY = 0;
+        var isDragging = false;
+        var dragDirection = null;
+        var THRESHOLD_PERCENT = 0.40;
 
-        var startX = 0, startY = 0, startTime = 0;
-        var SWIPE_THRESHOLD = 60;
-        var MAX_VERTICAL = 100;
-        var MAX_DURATION = 400;
+        var wrapper = document.getElementById('pageWrapper');
+        var indicatorLeft = document.getElementById('dragIndicatorLeft');
+        var indicatorRight = document.getElementById('dragIndicatorRight');
+        var pageDim = document.getElementById('pageDim');
+
+        function isInScrollable(el) {
+            while (el && el !== document.body) {
+                var style = window.getComputedStyle(el);
+                var overflow = style.overflow + style.overflowX + style.overflowY;
+                if ((overflow.includes('scroll') || overflow.includes('auto')) && 
+                    (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight)) {
+                    return true;
+                }
+                el = el.parentElement;
+            }
+            return false;
+        }
+
+        function isInteractive(el) {
+            var tag = el.tagName.toLowerCase();
+            if (tag === 'a' || tag === 'button' || tag === 'input' || tag === 'textarea' || tag === 'select') return true;
+            if (el.closest('a') || el.closest('button')) return true;
+            if (el.classList.contains('slider-dot')) return true;
+            return false;
+        }
+
+        function isMenuOpen() {
+            var panel = document.getElementById('mobileMenuPanel');
+            return panel && panel.classList.contains('active');
+        }
+
+        function isPdfModalOpen() {
+            var modal = document.getElementById('pdfModal');
+            return modal && modal.classList.contains('active');
+        }
+
+        function getPrevPage() {
+            var prevIdx = (idx - 1 + pages.length) % pages.length;
+            return pages[prevIdx];
+        }
+
+        function getNextPage() {
+            var nextIdx = (idx + 1) % pages.length;
+            return pages[nextIdx];
+        }
+
+        function createIncomingPage(url, fromDirection) {
+            var div = document.createElement('div');
+            div.className = 'page-incoming ' + (fromDirection === 'right' ? 'from-right' : 'from-left');
+            div.id = 'pageIncoming';
+            div.style.background = getComputedStyle(document.body).backgroundColor || '#f5f7fa';
+            div.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;"><div style="width:40px;height:40px;border:3px solid #e5e7eb;border-top-color:#2563eb;border-radius:50%;animation:spin 0.8s linear infinite;"></div></div><style>@keyframes spin{to{transform:rotate(360deg)}}</style>';
+            document.body.appendChild(div);
+
+            fetch(url)
+                .then(function(r) { return r.text(); })
+                .then(function(html) {
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    div.innerHTML = doc.body.innerHTML;
+                    div.querySelectorAll('a[href]').forEach(function(a) {
+                        var href = a.getAttribute('href');
+                        if (pages.includes(href)) {
+                            a.setAttribute('data-nav', href);
+                        }
+                    });
+                })
+                .catch(function() {
+                    window.location.href = url;
+                });
+
+            return div;
+        }
+
+        function navigateWithAnimation(url, direction) {
+            if (isNavigating) return;
+            isNavigating = true;
+
+            var fromDirection = direction === 'left' ? 'right' : 'left';
+            var incoming = createIncomingPage(url, fromDirection);
+
+            wrapper.classList.add(direction === 'left' ? 'sliding-out-left' : 'sliding-out-right');
+
+            requestAnimationFrame(function() {
+                incoming.classList.add('active', 'animating-in');
+            });
+
+            setTimeout(function() {
+                window.location.href = url;
+            }, 350);
+        }
+
+        function cancelDrag() {
+            wrapper.classList.remove('dragging');
+            wrapper.classList.add('returning');
+            pageDim.classList.remove('visible');
+            indicatorLeft.classList.remove('visible');
+            indicatorRight.classList.remove('visible');
+
+            var incoming = document.getElementById('pageIncoming');
+            if (incoming) {
+                incoming.classList.add('animating-out');
+                setTimeout(function() {
+                    if (incoming.parentNode) incoming.parentNode.removeChild(incoming);
+                }, 350);
+            }
+
+            setTimeout(function() {
+                wrapper.classList.remove('returning');
+                wrapper.style.transform = '';
+            }, 300);
+        }
 
         document.addEventListener('touchstart', function(e) {
+            if (isNavigating) return;
             var t = e.touches[0];
             startX = t.clientX;
             startY = t.clientY;
-            startTime = Date.now();
+            currentX = startX;
+            currentY = startY;
+            isDragging = false;
+            dragDirection = null;
         }, { passive: true });
 
-        document.addEventListener('touchend', function(e) {
-            var t = e.changedTouches[0];
-            var dx = t.clientX - startX;
-            var dy = t.clientY - startY;
-            var dt = Date.now() - startTime;
+        document.addEventListener('touchmove', function(e) {
+            if (isNavigating) return;
+            var t = e.touches[0];
+            currentX = t.clientX;
+            currentY = t.clientY;
 
-            if (dt > MAX_DURATION || Math.abs(dy) > MAX_VERTICAL || Math.abs(dx) < SWIPE_THRESHOLD) return;
+            var dx = currentX - startX;
+            var dy = currentY - startY;
+            var absDx = Math.abs(dx);
+            var absDy = Math.abs(dy);
 
-            var target = e.target;
-            while (target && target !== document.body) {
-                var style = window.getComputedStyle(target);
-                var overflow = style.overflow + style.overflowX + style.overflowY;
-                if (overflow.includes('scroll') || overflow.includes('auto')) {
-                    if (target.scrollWidth > target.clientWidth) return;
+            if (!dragDirection && (absDx > 8 || absDy > 8)) {
+                if (absDx > absDy && absDx > 8) {
+                    dragDirection = 'horizontal';
+                } else {
+                    dragDirection = 'vertical';
                 }
-                target = target.parentElement;
             }
 
-            var panel = document.getElementById('mobileMenuPanel');
-            if (panel && panel.classList.contains('active')) return;
+            if (dragDirection !== 'horizontal') return;
 
-            var pdfModal = document.getElementById('pdfModal');
-            if (pdfModal && pdfModal.classList.contains('active')) return;
+            if (!isDragging) {
+                if (isInteractive(e.target)) return;
+                if (isInScrollable(e.target)) return;
+                if (isMenuOpen()) return;
+                if (isPdfModalOpen()) return;
+
+                var screenWidth = window.innerWidth;
+                var edgeZone = screenWidth * 0.15;
+                var fromLeftEdge = startX < edgeZone;
+                var fromRightEdge = startX > (screenWidth - edgeZone);
+
+                if (dx < 0 && !fromLeftEdge) return;
+                if (dx > 0 && !fromRightEdge) return;
+
+                isDragging = true;
+                wrapper.classList.add('dragging');
+            }
+
+            if (!isDragging) return;
+            if (e.cancelable) e.preventDefault();
+
+            var screenWidth = window.innerWidth;
+            var resistance = 0.6;
+            var translateX = dx * resistance;
+
+            wrapper.style.transform = 'translateX(' + translateX + 'px)';
+
+            var dimOpacity = Math.min(Math.abs(translateX) / (screenWidth * 0.5), 0.3);
+            pageDim.style.background = 'rgba(0,0,0,' + dimOpacity + ')';
+            pageDim.classList.add('visible');
 
             if (dx < 0) {
-                window.location.href = nextPage;
+                indicatorRight.classList.add('visible');
+                indicatorLeft.classList.remove('visible');
             } else {
-                window.location.href = prevPage;
+                indicatorLeft.classList.add('visible');
+                indicatorRight.classList.remove('visible');
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchend', function(e) {
+            if (!isDragging || isNavigating) {
+                isDragging = false;
+                dragDirection = null;
+                return;
+            }
+
+            var dx = currentX - startX;
+            var screenWidth = window.innerWidth;
+            var threshold = screenWidth * THRESHOLD_PERCENT;
+
+            wrapper.classList.remove('dragging');
+
+            if (Math.abs(dx) > threshold) {
+                if (dx < 0) {
+                    navigateWithAnimation(getNextPage(), 'left');
+                } else {
+                    navigateWithAnimation(getPrevPage(), 'right');
+                }
+            } else {
+                cancelDrag();
+            }
+
+            isDragging = false;
+            dragDirection = null;
+        }, { passive: true });
+
+        document.addEventListener('touchcancel', function(e) {
+            if (isDragging) {
+                cancelDrag();
+                isDragging = false;
+                dragDirection = null;
             }
         }, { passive: true });
     })();
     </script>
+    </div><!-- /page-wrapper -->
+
+    <!-- Drag indicators -->
+    <div class="drag-indicator left" id="dragIndicatorLeft">‹</div>
+    <div class="drag-indicator right" id="dragIndicatorRight">›</div>
+    <div class="page-dim" id="pageDim"></div>
+
 </body>
 </html>
