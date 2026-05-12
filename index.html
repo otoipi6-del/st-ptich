@@ -794,6 +794,26 @@
     <link rel="icon" type="image/jpeg" href="https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/images/logo.jpg">
 </head>
 <body>
+    <script>
+    // Prevent swipe script from intercepting menu toggle touches
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                }, { passive: true });
+                menuToggle.addEventListener('touchmove', function(e) {
+                    e.stopPropagation();
+                }, { passive: true });
+                menuToggle.addEventListener('touchend', function(e) {
+                    e.stopPropagation();
+                    openMobileMenu();
+                }, { passive: true });
+            }
+        });
+    })();
+    </script>
     <div class="page-wrapper" id="pageWrapper">
 
     <!-- Header -->
@@ -806,7 +826,7 @@
                     <span>Садовое товарищество</span>
                 </div>
             </a>
-            <button class="menu-toggle" onclick="openMobileMenu()" ontouchstart="openMobileMenu()" aria-label="Открыть меню">☰</button>
+            <button class="menu-toggle" onclick="openMobileMenu()" aria-label="Открыть меню">☰</button>
         </div>
         <nav class="nav">
             <div class="nav-inner">
