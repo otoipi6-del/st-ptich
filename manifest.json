@@ -1,4 +1,5 @@
 {
+  "id": "/st-ptich/",
   "name": "СТ ПТИЧЬ — Садовое товарищество",
   "short_name": "ПТИЧЬ",
   "description": "Информационный сайт садового товарищества. Тарифы, контакты, документы, карта.",
@@ -10,16 +11,16 @@
   "scope": "/st-ptich/",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/st-ptich/images/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "/st-ptich/images/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
