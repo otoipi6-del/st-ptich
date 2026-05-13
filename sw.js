@@ -1,4 +1,4 @@
-const CACHE_NAME = 'st-ptich-cache';
+const CACHE_NAME = 'st-ptich-cache-v2';
 const URLS_TO_CACHE = [
   '/st-ptich/',
   '/st-ptich/index.html',
@@ -8,6 +8,9 @@ const URLS_TO_CACHE = [
   '/st-ptich/kontakty.html',
   '/st-ptich/dokumenty.html',
   '/st-ptich/about.html',
+  '/st-ptich/images/icon-192.png',
+  '/st-ptich/images/icon-512.png',
+  '/st-ptich/images/apple-touch-icon.png',
   'https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/css/style.css',
   'https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/images/logo.jpg',
   'https://cdn.jsdelivr.net/gh/otoipi6-del/st-ptich@main/images/ber.jpg'
@@ -38,7 +41,7 @@ self.addEventListener('activate', (event) => {
 // ===== ЗАПРОС: Сеть первой, кэш на подстраховку =====
 self.addEventListener('fetch', (event) => {
   // HTML-страницы — всегда свежие из сети
-  if (event.request.mode === 'navigate' || event.request.headers.get('accept').includes('text/html')) {
+  if (event.request.mode === 'navigate' || (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html'))) {
     event.respondWith(
       fetch(event.request).catch(() => caches.match(event.request))
     );
