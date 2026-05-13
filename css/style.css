@@ -122,7 +122,6 @@ body {
 
 /* ===== HEADER ===== */
 .header {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
     color: var(--white);
     padding: 0;
     position: sticky;
