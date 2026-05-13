@@ -134,26 +134,28 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         .energy-nav button {
-            background: none;
-            border: none;
+            background: transparent;
+            border: 2px solid #eab308;
             padding: 0.6rem 1.2rem;
             font-size: 1rem;
             font-weight: 500;
             border-radius: 40px;
             cursor: pointer;
             transition: all 0.2s ease;
-            color: var(--gray-700, #374151);
+            color: #92400e;
             font-family: inherit;
         }
         .energy-nav button.active {
-            background: var(--primary, #2d7a3e);
-            color: white;
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            color: #1e293b;
+            font-weight: 600;
+            border-color: transparent;
         }
         .energy-nav button:hover:not(.active) {
-            background: #e6f2e6;
+            background: #fef9c3;
+            color: #713f12;
+            border-color: #ca8a04;
         }
-
-        /* Тариф-бейдж */
         .tariff-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary-light, #4ade80), var(--primary, #2d7a3e));
@@ -604,7 +606,7 @@
             { memberId: 4, date: "2025-04-07", amount: 19.00 }
         ];
 
-        const TARIFF = 0.3341; // руб/кВт·ч
+        const TARIFF = 0.2714; // руб/кВт·ч
 
         // Вспомогательные функции
         function getMemberById(id) {
