@@ -9,173 +9,111 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="ПТИЧЬ">
-    <title>Контакты — СТ ПТИЧЬ</title>
+    <link rel="icon" type="image/jpeg" href="/st-ptich/images/logo.jpg">
+    <title>Тарифы, платежи, реквизиты — СТ ПТИЧЬ</title>
     <link rel="stylesheet" href="/st-ptich/css/style.css">
     <style>
-        .staff-card {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        .price-highlight {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            font-size: 20px;
+            font-weight: 700;
+            margin: 16px 0;
+            display: inline-block;
+            box-shadow: var(--shadow-sm);
+        }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .warning-box strong {
+            color: #856404;
+        }
+        .danger-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+        }
+        .danger-box strong {
+            color: #721c24;
+        }
+        .erip-box {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
             border-radius: var(--radius-md);
             padding: 28px;
+            margin-top: 24px;
+            border: 2px solid var(--primary-light);
+        }
+        .erip-box h4 {
+            color: var(--primary-dark);
             margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid #2d7a3e;
-            transition: var(--transition);
+            font-size: 22px;
         }
-        .staff-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateX(4px);
+        .erip-path {
+            background: var(--white);
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            border-left: 3px solid var(--accent);
         }
-        .staff-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1e5a2a;
-            margin-bottom: 8px;
-        }
-        .staff-card .role {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            color: var(--white);
-            padding: 4px 14px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 14px;
-        }
-        .staff-card p {
-            margin-bottom: 8px;
+        .erip-path p {
+            margin: 6px 0;
             font-size: 15px;
             color: var(--gray-700);
         }
-        .staff-card .phone {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
+        .erip-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0;
         }
-        .staff-card .phone:hover {
-            text-decoration: underline;
-        }
-        .viber-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: #7360f2;
-            text-decoration: none;
-            font-weight: 600;
+        .erip-service {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 14px;
-            margin-top: 6px;
+            font-weight: 600;
         }
-        .viber-link:hover {
-            text-decoration: underline;
+        .erip-fields {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            margin-top: 16px;
         }
-        .member-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 8px;
-        }
-        .member-list li {
-            padding: 3px 0;
-            border-bottom: none;
-            font-size: 16px;
-            color: var(--gray-700);
+        .erip-fields p {
+            margin: 8px 0;
+            font-size: 15px;
             display: flex;
             align-items: center;
-            gap: 6px;
-            line-height: 1.3;
+            gap: 8px;
         }
-        .member-list li::before {
+        .erip-fields p::before {
             content: '🔸';
-            font-size: 10px;
+        }
+        .date-badge {
+            display: inline-block;
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
         .section-divider {
             height: 2px;
             background: linear-gradient(90deg, var(--primary-light), var(--accent));
             border-radius: 2px;
-            margin: 50px 0;
+            margin: 40px 0;
         }
-        .staff-divider {
-            border: none;
-            border-top: 1px solid var(--gray-100);
-            margin: 16px 0;
-        }
-        .emergency-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .emergency-card {
-            background: var(--white);
-            border-radius: var(--radius-md);
-            padding: 28px;
-            border-left: 4px solid var(--primary);
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        .emergency-card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateX(4px);
-        }
-        .emergency-card.urgent {
-            border-left-color: #dc3545;
-            background: linear-gradient(135deg, #fff5f5, #ffe0e0);
-        }
-        .emergency-card.urgent h4 {
-            color: #dc3545;
-        }
-        .emergency-card.gov {
-            border-left-color: #1a5276;
-            background: linear-gradient(135deg, #f0f7ff, #d6e8ff);
-        }
-        .emergency-card.gov h4 {
-            color: #1a5276;
-        }
-        .emergency-card.st {
-            border-left-color: #2d7a3e;
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-        }
-        .emergency-card.st h4 {
-            color: #1e5a2a;
-        }
-        .emergency-card h4 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .emergency-card .phone {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 8px;
-            display: block;
-            text-decoration: none;
-        }
-        .emergency-card .phone:hover {
-            color: var(--primary);
-        }
-        .emergency-card .address {
-            font-size: 14px;
-            color: var(--gray-700);
-            margin-bottom: 6px;
-            line-height: 1.5;
-        }
-        .emergency-card .role {
-            display: inline-block;
-            background: rgba(255,255,255,0.6);
-            color: var(--gray-700);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
     </style>
 
         <style>
@@ -195,40 +133,7 @@
         .footer-nav a:hover { color: var(--accent); }
         .footer-nav a.active { color: var(--accent); font-weight: 700; }
         .footer-nav a.active::before { content: '▸ '; }
-            .donate-box {
-            background: linear-gradient(135deg, #fff7ed, #ffedd5);
-            border-radius: var(--radius-sm);
-            padding: 16px 20px;
-            margin-top: 16px;
-            border-left: 3px solid var(--accent);
-        }
-        .donate-box p {
-            font-size: 13px !important;
-            color: var(--gray-600) !important;
-            line-height: 1.5 !important;
-            margin-bottom: 12px !important;
-        }
-        .btn-donate {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 18px;
-            background: var(--accent);
-            color: var(--dark);
-            border-radius: var(--radius-sm);
-            font-size: 14px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-        }
-        .btn-donate:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-</style>
+    </style>
     <style>
         /* Фоновое изображение для шапки */
         body .hero {
@@ -252,23 +157,8 @@
         body .hero-content {
             position: relative;
             z-index: 2;
-            color: white !important;
-        }
-        body .hero-content h1,
-        body .hero-content p {
-            color: white !important;
         }
     </style>
-    <style>
-        /* Viber links: mobile vs desktop */
-        .d-mobile { display: none !important; }
-        .d-desktop { display: inline-flex !important; }
-        @media (max-width: 768px) {
-            .d-mobile { display: inline-flex !important; }
-            .d-desktop { display: none !important; }
-        }
-    </style>
-    <link rel="icon" type="image/jpeg" href="/st-ptich/images/logo.jpg">
     <!-- ===== MOBILE CARD MENU ===== -->
     <style>
         .mobile-menu-overlay {
@@ -540,9 +430,9 @@
                 <ul class="nav-list">
                     <li><a href="index.html">Главная</a></li>
                     <li><a href="about.html">О Товариществе</a></li>
-                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="tarify.html" class="active">Тарифы</a></li>
                     <li><a href="karta.html">Карта</a></li>
-                    <li><a href="kontakty.html" class="active">Контакты</a></li>
+                    <li><a href="kontakty.html">Контакты</a></li>
                     <li><a href="dokumenty.html">Документы</a></li>
                 </ul>
             </div>
@@ -576,7 +466,7 @@
                 </div>
                 <span class="mmc-text">О Товариществе</span>
             </a>
-            <a href="tarify.html" class="mobile-menu-card mmc-orange" data-page="tarify.html">
+            <a href="tarify.html" class="mobile-menu-card mmc-orange active" data-page="tarify.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
                 </div>
@@ -588,7 +478,7 @@
                 </div>
                 <span class="mmc-text">Карта</span>
             </a>
-            <a href="kontakty.html" class="mobile-menu-card mmc-teal active" data-page="kontakty.html">
+            <a href="kontakty.html" class="mobile-menu-card mmc-teal" data-page="kontakty.html">
                 <div class="mmc-icon">
                     <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 </div>
@@ -605,149 +495,105 @@
 
     <section class="hero" style="padding: 60px 24px;">
         <div class="hero-content">
-            <h1>Контакты СТ ПТИЧЬ</h1>
-            <p>Все контакты товарищества, экстренные службы и организации</p>
+            <h1>Тарифы, платежи, реквизиты</h1>
+            <p>Информация о членских взносах, тарифах на электроэнергию и способах оплаты</p>
         </div>
     </section>
 
     <section class="section">
         <div style="max-width: 900px; margin: 0 auto;">
 
-            <div class="section-header" style="margin-bottom: 30px;">
-                <h2>Штат СТ ПТИЧЬ</h2>
-            </div>
+            <!-- Электроэнергия -->
+            <div class="info-block" style="margin-bottom: 30px;">
+                <h3>⚡ Тариф на электроэнергию</h3>
+                <span class="date-badge">с 01.04.2026</span>
 
-            <!-- Chairman -->
-            <div class="staff-card">
-                <h4>Египко Дмитрий Вячеславович</h4>
-                <span class="role">Председатель</span>
-                <p><a href="tel:+375296428604" class="phone">📞 +375 (29) 642-86-04</a></p>
-                <p>
-                    <a href="viber://chat?number=375296428604" class="viber-link d-mobile" target="_blank">💬 Написать Председателю в Viber (моб.)</a>
-                    <a href="viber://chat?number=%2B375296428604" class="viber-link d-desktop" target="_blank">💬 Написать Председателю в Viber</a>
-                </p>
-            <div class="donate-box">
-                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
-                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
-            </div>
-            </div>
-
-            <hr class="staff-divider">
-
-            <!-- Accountant -->
-            <div class="staff-card">
-                <h4>Дмитриева Юлия Игоревна</h4>
-                <span class="role">Бухгалтер</span>
-                <p><a href="tel:+375297658773" class="phone">📞 +375 (29) 765-87-73</a></p>
-                <p>
-                    <a href="viber://chat?number=375297658773" class="viber-link d-mobile" target="_blank">💬 Написать бухгалтеру в Viber (моб.)</a>
-                    <a href="viber://chat?number=%2B375297658773" class="viber-link d-desktop" target="_blank">💬 Написать бухгалтеру в Viber</a>
-                </p>
-            <div class="donate-box">
-                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
-                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
-            </div>
-            </div>
-
-            <hr class="staff-divider">
-
-            <!-- Electrician -->
-            <div class="staff-card">
-                <h4>Босяков Анатолий Андреевич</h4>
-                <span class="role">Электрик</span>
-                <p><a href="tel:+375296959737" class="phone">📞 +375 (29) 695-97-37</a></p>
-                <p>
-                    <a href="viber://chat?number=375296959737" class="viber-link d-mobile" target="_blank">💬 Написать электрику в Viber (моб.)</a>
-                    <a href="viber://chat?number=%2B375296959737" class="viber-link d-desktop" target="_blank">💬 Написать электрику в Viber</a>
-                </p>
-            <div class="donate-box">
-                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
-                <button class="btn-donate" disabled style="opacity: 0.6; cursor: not-allowed;">💳 Ссылка появится позже</button>
-            </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <!-- Site Admin -->
-            <div class="staff-card">
-                <h4>Глинистый Станислав Михайлович</h4>
-                <span class="role">Администратор сайта</span>
-                <p><a href="tel:+375296463715" class="phone">📞 +375 (29) 646-37-15</a></p>
-                <p>
-                    <a href="viber://chat?number=375296463715" class="viber-link d-mobile" target="_blank">💬 Написать администратору сайта в Viber (моб.)</a>
-                    <a href="viber://chat?number=%2B375296463715" class="viber-link d-desktop" target="_blank">💬 Написать администратору сайта в Viber</a>
-                </p>
-            <div class="donate-box">
-                <p>💰 <strong>Донаты:</strong> По этой ссылке вы перейдёте в платёжный сервис ЕРИП и сможете быстро перевести деньги на карту без комиссии. Вам останется только выбрать свой банк, ввести сумму и подтвердить перевод.</p>
-                <a href="https://pay.raschet.by/#00020132370010by.raschet0107432515110083372096653039335802BY6304B009" class="btn-donate" target="_blank">💳 Перевести деньги</a>
-            </div>
-            </div>
-
-            <div class="section-divider"></div>
-
-            <!-- Organizations -->
-            <div class="section-header" style="margin-bottom: 30px;">
-                <h2>🏛️ Организации и учреждения</h2>
-                <p>Контакты районных служб и госорганов</p>
-            </div>
-            <div class="emergency-grid">
-                <div class="emergency-card gov">
-                    <h4>⚡ Энергосети Минского района</h4>
-                    <a href="tel:+375175045332" class="phone">+375 (17) 504-53-32</a>
-                    <p class="address">Электроснабжение района, аварийные отключения</p>
+                <div class="price-highlight">
+                    1 кВт/час = 0,3341 рубля
                 </div>
-                <div class="emergency-card gov">
-                    <h4>🏘️ Щомыслицкий сельсовет</h4>
-                    <span class="role">Председатель</span>
-                    <a href="tel:+375175093149" class="phone">+375 (17) 509-31-49</a>
-                    <p class="address">223049, Минский район, аг. Щомыслица, ул. Жуковского, 44</p>
+
+                <div class="danger-box">
+                    <strong>Важно:</strong> Срок оплаты за электроэнергию — <strong>ежемесячно</strong>, не позднее последнего дня текущего месяца.
                 </div>
-                <div class="emergency-card gov">
-                    <h4>🏛️ Минский райисполком</h4>
-                    <span class="role">Приёмная</span>
-                    <a href="tel:+375172705024" class="phone">+375 (17) 270-50-24</a>
-                    <p class="address">220073, г. Минск, ул. Ольшевского, 8</p>
-                </div>
-                <div class="emergency-card gov">
-                    <h4>📋 ИМНС по Минскому району</h4>
-                    <a href="tel:+375173592019" class="phone">+375 (17) 359-20-19</a>
-                    <p class="address">220140, г. Минск, ул. Притыцкого, д. 90</p>
-                    <p class="address">Налоговая инспекция, вопросы налогообложения</p>
+
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px;">
+                    <a href="energy.html" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px; border: 2px solid #eab308;"><span style="filter: grayscale(100%) brightness(200%); display: inline-block;">👉</span> Учёт электроэнергии</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdc3JPV9T5MK_qD9qkWNF3yvFhs_y5atbeVfWmugTry6OkiRg/viewform" target="_blank" class="btn btn-primary" style="font-size: 14px; padding: 10px 20px; border: 2px solid #eab308;"><span style="filter: grayscale(100%) brightness(200%); display: inline-block;">👉</span> Ввод показаний электросчётчика</a>
                 </div>
             </div>
 
             <div class="section-divider"></div>
 
-            <!-- Emergency Services -->
-            <div class="section-header" style="margin-bottom: 30px;">
-                <h2>🚨 Экстренные службы</h2>
-                <p>Звоните в случае опасности для жизни и здоровья</p>
+            <!-- Членские взносы -->
+            <div class="info-block" style="margin-bottom: 30px;">
+                <h3>💰 Членские взносы</h3>
+                <span class="date-badge">с 01.07.2024</span>
+
+                <div class="price-highlight">
+                    70 рублей в квартал
+                </div>
+
+                <div class="warning-box" style="color: #856404;">
+                    <strong>Льготы:</strong> Для пенсионеров — <strong>65 рублей в квартал</strong> (при условии поданного заявления)
+                </div>
+
+                <div class="danger-box">
+                    <strong>Важно:</strong> Срок оплаты взносов — <strong>ежеквартально</strong>, не позднее последнего дня текущего квартала.
+                </div>
             </div>
-            <div class="emergency-grid">
-                <div class="emergency-card urgent">
-                    <h4>🚨 Единый номер экстренных служб</h4>
-                    <a href="tel:112" class="phone">112</a>
-                    <p class="address">Пожар, милиция, скорая помощь</p>
+
+            <div class="section-divider"></div>
+
+            <!-- ЕРИП -->
+            <div class="erip-box">
+                <h4>🏦 Платежи через ЕРИП</h4>
+
+                <div class="erip-path">
+                    <p><strong>Путь в меню ЕРИП:</strong></p>
+                    <p>Коммунальные платежи →</p>
+                    <p>Садоводческие товарищества →</p>
+                    <p>Минская обл. →</p>
+                    <p>Минский р-н →</p>
+                    <p><strong>Птичь д. Заболотье</strong></p>
                 </div>
-                <div class="emergency-card urgent">
-                    <h4>🚑 Скорая медицинская помощь</h4>
-                    <a href="tel:103" class="phone">103</a>
-                    <p class="address">Неотложная медицинская помощь</p>
+
+                <p style="font-size: 16px; font-weight: 600; color: var(--gray-700); margin-bottom: 12px;">Выбирайте одну из услуг:</p>
+
+                <div class="erip-services">
+                    <span class="erip-service">Членские взносы</span>
+                    <span class="erip-service">Электроэнергия (код: 4715771)</span>
+                    <span class="erip-service">Целевые взносы</span>
                 </div>
-                <div class="emergency-card urgent">
-                    <h4>🔥 МЧС</h4>
-                    <a href="tel:101" class="phone">101</a>
-                    <p class="address">Пожар, загорание, спасение</p>
+
+                <div class="erip-fields">
+                    <p style="font-weight: 600;">Вводите данные:</p>
+                    <p>Номер участка</p>
+                    <p>ФИО</p>
+                    <p>Сумма</p>
+                    <p>Нажмите «Оплатить»</p>
                 </div>
-                <div class="emergency-card urgent">
-                    <h4>👮 Милиция</h4>
-                    <a href="tel:102" class="phone">102</a>
-                    <p class="address">Преступление, правонарушение, кража</p>
+
+                <div class="danger-box" style="margin-top: 20px;">
+                    <strong>Очень внимательно</strong> вносите номер участка, за который платите.
                 </div>
-                <div class="emergency-card urgent">
-                    <h4>⛽ Мингаз</h4>
-                    <a href="tel:104" class="phone">104</a>
-                    <p class="address">Утечка газа, аварии на газопроводе</p>
+            </div>
+
+            <div class="section-divider"></div>
+
+            <!-- Реквизиты -->
+            <div class="info-block" style="margin-bottom: 30px;">
+                <h3>🏦 Реквизиты СТ ПТИЧЬ</h3>
+
+                <div style="background: var(--white); padding: 24px; border-radius: var(--radius-sm); border: 2px solid var(--primary-light);">
+                    <p style="margin-bottom: 12px;"><strong>Получатель:</strong> Садоводческое товарищество "Птичь", д. Заболотье</p>
+                    <p style="margin-bottom: 12px;"><strong>Банк:</strong> ОАО "Белинвестбанк"</p>
+                    <p style="margin-bottom: 12px;"><strong>IBAN:</strong> <span style="font-family: monospace; font-size: 16px; background: var(--gray-100); padding: 4px 8px; border-radius: 4px;">BY56BLBB30150600210928001001</span></p>
+                    <p style="margin-bottom: 12px;"><strong>BIC:</strong> <span style="font-family: monospace; font-size: 16px; background: var(--gray-100); padding: 4px 8px; border-radius: 4px;">BLBBBY2X</span></p>
+                    <p style="margin-bottom: 0;"><strong>УНП:</strong> <span style="font-family: monospace; font-size: 16px; background: var(--gray-100); padding: 4px 8px; border-radius: 4px;">600210928</span></p>
+                </div>
+
+                <div class="warning-box" style="color: #856404; margin-top: 20px;">
+                    <strong>Совет:</strong> При оплате через банк указывайте назначение платежа: <em>"Членские взносы / Электроэнергия, ФИО, № участка"</em>
                 </div>
             </div>
 
@@ -759,9 +605,9 @@
             <div class="footer-nav" style="margin-bottom:16px;">
                 <a href="index.html">Главная</a>
                 <a href="about.html">О Товариществе</a>
-                <a href="tarify.html">Тарифы</a>
+                <a href="tarify.html" class="active">Тарифы</a>
                 <a href="karta.html">Карта</a>
-                <a href="kontakty.html" class="active">Контакты</a>
+                <a href="kontakty.html">Контакты</a>
                 <a href="dokumenty.html">Документы</a>
             </div>
             <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
