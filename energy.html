@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учёт электроэнергии: показания, начисления, платежи, задолженности — СТ ПТИЧЬ</title>
+    <link rel="icon" type="image/jpeg" href="/st-ptich/images/logo.jpg">
+    <meta name="theme-color" content="#2d7a3e">
+    <link rel="manifest" href="/st-ptich/manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/st-ptich/images/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ПТИЧЬ">
+    
+    <!-- ===== INLINE STYLES (встроены из style.css + energy-специфичные) ===== -->
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d7a3e;
+            --primary-dark: #1e5a2a;
+            --primary-light: #4a9e5c;
+            --accent: #e8b923;
+            --accent-hover: #d4a520;
+            --dark: #1a1a1a;
+            --gray-900: #2d2d2d;
+            --gray-700: #4a4a4a;
+            --gray-500: #6b6b6b;
+            --gray-300: #b0b0b0;
+            --gray-100: #f5f5f5;
+            --white: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--white);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.85;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: linear-gradient(to right, #0d3d18 0%, #0d3d18 60%, var(--accent) 100%);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 14px 16px;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            color: var(--white);
+            border-bottom-color: var(--accent);
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--white);
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 60px 24px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: var(--gray-300);
+            padding: 60px 24px 30px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-nav a {
+            color: var(--gray-300);
+            text-decoration: underline;
+            margin: 0 10px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent);
+        }
+
+        .footer-nav a.active {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .footer-nav a.active::before {
+            content: '▸ ';
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-dark);
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .nav-list {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 40px 16px;
+            }
+        }
+
+        /* ===== ENERGY-SPECIFIC STYLES ===== */
+        .energy-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .energy-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #ddeede;
+        }
+
+        .energy-card h2 {
+            color: var(--primary-dark, #1e5a2a);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .energy-card h3 {
+            margin: 1rem 0 0.5rem;
+            font-size: 1.1rem;
+            color: var(--gray-800, #1f2937);
+        }
+
+        .energy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .energy-table th,
+        .energy-table td {
+            text-align: left;
+            padding: 0.75rem 0.5rem;
+            border-bottom: 1px solid #e0ece0;
+        }
+
+        .energy-table th {
+            background: #f4faf4;
+            font-weight: 600;
+            color: var(--gray-700, #374151);
+        }
+
+        .energy-table td {
+            color: var(--gray-800, #1f2937);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--gray-700, #374151);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #c8ddc8;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #fff;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary, #2d7a3e);
+            box-shadow: 0 0 0 3px rgba(45, 122, 62, 0.15);
+        }
+
+        .btn-energy {
+            background: var(--primary, #2d7a3e);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-block;
+        }
+
+        .btn-energy:hover {
+            background: var(--primary-dark, #1e5a2a);
+            transform: translateY(-1px);
+        }
+
+        .btn-energy:active {
+            transform: translateY(0);
+        }
+
+        .debt {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .overpay {
+            color: var(--primary-dark, #1e5a2a);
+            font-weight: bold;
+        }
+
+        .info-text {
+            color: #555;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .info-text strong {
+            color: var(--gray-800, #1f2937);
+        }
+
+        .energy-nav {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.75rem;
+            border-bottom: 1px solid #cfe3cf;
+            flex-wrap: wrap;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .energy-nav button {
+            background: transparent;
+            border: 2px solid #eab308;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #92400e;
+            font-family: inherit;
+        }
+
+        .energy-nav button.active {
+            background: linear-gradient(135deg, #eab308, #ca8a04);
+            color: #1e293b;
+            font-weight: 600;
+            border-color: transparent;
+        }
+
+        .energy-nav button:hover:not(.active) {
+            background: #fef9c3;
+            color: #713f12;
+            border-color: #ca8a04;
+        }
+
+        .tariff-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-light, #4ade80), var(--primary, #2d7a3e));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 700px) {
+            .energy-nav button {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            .energy-table th, .energy-table td {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.3rem;
+            }
+            .energy-card {
+                padding: 1rem;
+                border-radius: 16px;
+            }
+            .energy-card h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-menu-panel {
+            position: fixed;
+            top: 0; right: 0;
+            width: 85%; max-width: 360px;
+            height: 100%;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+            overflow: hidden;
+            box-shadow: -8px 0 40px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu-panel.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            flex-shrink: 0;
+            min-height: 64px;
+        }
+
+        .mobile-menu-header .logo-sm {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-menu-header .logo-sm img {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .mobile-menu-header .logo-sm .logo-text-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu-header .logo-sm .logo-text-block .logo-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .mobile-menu-header .logo-sm .logo-text-block .logo-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            line-height: 1.2;
+            margin-top: 1px;
+        }
+
+        .mobile-menu-close {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #9ca3af;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-close:hover {
+            background: #6b7280;
+            color: white;
+        }
+
+        .mobile-menu-cards {
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+            min-height: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.35) 100%),
+                        url('/st-ptich/images/ber.jpg') center/cover no-repeat;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-cards::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+
+        .mobile-menu-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(50px);
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-panel.active .mobile-menu-card {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(1) { transition-delay: 0.12s; }
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(2) { transition-delay: 0.20s; }
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(3) { transition-delay: 0.28s; }
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(4) { transition-delay: 0.36s; }
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(5) { transition-delay: 0.44s; }
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(6) { transition-delay: 0.52s; }
+        .mobile-menu-panel.active .mobile-menu-card:nth-child(7) { transition-delay: 0.60s; }
+
+        .mobile-menu-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 5px;
+            border-radius: 0 4px 4px 0;
+            transition: width 0.2s;
+        }
+
+        .mobile-menu-card:hover {
+            transform: translateX(4px);
+        }
+
+        .mobile-menu-card:hover::before {
+            width: 8px;
+        }
+
+        .mobile-menu-card.active {
+            font-weight: 700;
+            background: linear-gradient(135deg, #fef9c3, #fde047) !important;
+            border-color: #eab308;
+            box-shadow: 0 0 0 3px #eab308, 0 4px 12px rgba(234,179,8,0.3);
+        }
+
+        .mobile-menu-card.active::before {
+            width: 8px;
+            background: #ca8a04;
+        }
+
+        .mobile-menu-card.active .mmc-text {
+            color: #713f12;
+        }
+
+        .mmc-green {
+            background: linear-gradient(135deg, #f0f9f2, #e0f2e4);
+            color: #1e5a2a;
+        }
+
+        .mmc-green::before { background: #2d7a3e; }
+        .mmc-green .mmc-icon { background: linear-gradient(135deg, #2d7a3e, #1e5a2a); }
+
+        .mmc-blue {
+            background: linear-gradient(135deg, #f0f5ff, #e0ebff);
+            color: #1d4ed8;
+        }
+
+        .mmc-blue::before { background: #2563eb; }
+        .mmc-blue .mmc-icon { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+        .mmc-orange {
+            background: linear-gradient(135deg, #fff7ed, #ffedd5);
+            color: #c2410c;
+        }
+
+        .mmc-orange::before { background: #ea580c; }
+        .mmc-orange .mmc-icon { background: linear-gradient(135deg, #ea580c, #c2410c); }
+
+        .mmc-purple {
+            background: linear-gradient(135deg, #faf5ff, #f3e8ff);
+            color: #7e22ce;
+        }
+
+        .mmc-purple::before { background: #9333ea; }
+        .mmc-purple .mmc-icon { background: linear-gradient(135deg, #9333ea, #7e22ce); }
+
+        .mmc-teal {
+            background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+            color: #0f766e;
+        }
+
+        .mmc-teal::before { background: #0d9488; }
+        .mmc-teal .mmc-icon { background: linear-gradient(135deg, #0d9488, #0f766e); }
+
+        .mmc-red {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            color: #b91c1c;
+        }
+
+        .mmc-red::before { background: #dc2626; }
+        .mmc-red .mmc-icon { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+
+        .mmc-indigo {
+            background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+            color: #4338ca;
+        }
+
+        .mmc-indigo::before { background: #4f46e5; }
+        .mmc-indigo .mmc-icon { background: linear-gradient(135deg, #4f46e5, #4338ca); }
+
+        .mmc-icon {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+        }
+
+        .mmc-icon svg {
+            width: 20px; height: 20px;
+            fill: currentColor;
+        }
+
+        .mmc-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        @media (min-width: 769px) {
+            .mobile-menu-overlay, .mobile-menu-panel, .menu-toggle {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none !important; }
+            .menu-toggle {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                width: 44px; height: 44px;
+                background: rgba(255,255,255,0.15);
+                border: 1px solid rgba(255,255,255,0.3);
+                border-radius: 10px;
+                color: white;
+                font-size: 20px;
+                cursor: pointer;
+                backdrop-filter: blur(4px);
+            }
+        }
+
+        body.menu-open { overflow: hidden; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <a href="index.html" class="logo">
+                <img src="/st-ptich/images/logo.jpg" alt="СТ ПТИЧЬ" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                <div class="logo-text">
+                    ПТИЧЬ
+                    <span>Садовое товарищество</span>
+                </div>
+            </a>
+            <button class="menu-toggle" onclick="openMobileMenu()" aria-label="Открыть меню">☰</button>
+        </div>
+        <nav class="nav">
+            <div class="nav-inner">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="about.html">О Товариществе</a></li>
+                    <li><a href="tarify.html">Тарифы</a></li>
+                    <li><a href="karta.html">Карта</a></li>
+                    <li><a href="kontakty.html">Контакты</a></li>
+                    <li><a href="dokumenty.html">Документы</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu Panel -->
+    <div class="mobile-menu-panel" id="mobileMenuPanel">
+        <div class="mobile-menu-header">
+            <div class="logo-sm">
+                <img src="/st-ptich/images/logo.jpg" alt="СТ ПТИЧЬ">
+                <div class="logo-text-block">
+                    <span class="logo-title">ПТИЧЬ</span>
+                    <span class="logo-subtitle">Садовое товарищество</span>
+                </div>
+            </div>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Закрыть меню">✕</button>
+        </div>
+        <nav class="mobile-menu-cards">
+            <a href="index.html" class="mobile-menu-card mmc-green" data-page="index.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                </div>
+                <span class="mmc-text">Главная</span>
+            </a>
+            <a href="about.html" class="mobile-menu-card mmc-blue" data-page="about.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                </div>
+                <span class="mmc-text">О Товариществе</span>
+            </a>
+            <a href="tarify.html" class="mobile-menu-card mmc-orange" data-page="tarify.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
+                </div>
+                <span class="mmc-text">Тарифы</span>
+            </a>
+            <a href="karta.html" class="mobile-menu-card mmc-purple" data-page="karta.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.5 3l-6 3-6-3-5 2.5v15l5-2.5 6 3 6-3 5 2.5v-15l-5-2.5zm-6 14.5l-6-3v-9l6 3v9zm8-9v9l-5-2.5v-9l5 2.5z"/></svg>
+                </div>
+                <span class="mmc-text">Карта</span>
+            </a>
+            <a href="kontakty.html" class="mobile-menu-card mmc-teal" data-page="kontakty.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                </div>
+                <span class="mmc-text">Контакты</span>
+            </a>
+            <a href="dokumenty.html" class="mobile-menu-card mmc-indigo" data-page="dokumenty.html">
+                <div class="mmc-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <span class="mmc-text">Документы</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" style="padding: 60px 24px;">
+        <div class="hero-content">
+            <h1>⚡ Учёт электроэнергии</h1>
+            <p>Показания, начисления, платежи, задолженности</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section" style="padding-top: 24px;">
+        <div class="energy-container">
+            <!-- Навигация SPA -->
+            <div class="energy-nav">
+                <button data-page="dashboard" class="active">📊 Главная</button>
+                <button data-page="meters">📟 Передать показания</button>
+                <button data-page="balance">💰 Моя задолженность</button>
+                <button data-page="admin">🔧 Бухгалтеру / Правлению</button>
+            </div>
+
+            <!-- Корневой контейнер для рендера -->
+            <div id="app-root">
+                <div class="energy-card">Загрузка...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner" style="display:block; text-align:center; max-width:900px;">
+            <div class="footer-nav" style="margin-bottom:16px;">
+                <a href="index.html">Главная</a>
+                <a href="about.html">О Товариществе</a>
+                <a href="tarify.html">Тарифы</a>
+                <a href="karta.html">Карта</a>
+                <a href="kontakty.html">Контакты</a>
+                <a href="dokumenty.html">Документы</a>
+            </div>
+            <div style="margin-bottom:16px; font-size:14px; color:var(--gray-500);">
+                <span>Информационный сайт</span>
+            </div>
+            <div style="border-top:1px solid var(--gray-700); padding-top:16px; font-size:13px; color:var(--gray-500);">
+                <strong style="color:var(--white);">СТ ПТИЧЬ</strong> — Садовое товарищество.<br>
+                © Все права защищены. 2026 г.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ---------- МОБИЛЬНОЕ МЕНЮ ----------
+        (function() {
+            var overlay = document.getElementById('mobileMenuOverlay');
+            var panel = document.getElementById('mobileMenuPanel');
+
+            window.openMobileMenu = function() {
+                overlay.classList.add('active');
+                panel.classList.add('active');
+                document.body.classList.add('menu-open');
+            };
+
+            window.closeMobileMenu = function() {
+                overlay.classList.remove('active');
+                panel.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            };
+
+            var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.mobile-menu-card').forEach(function(card) {
+                if (card.dataset.page === currentPage) {
+                    card.classList.add('active');
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && panel.classList.contains('active')) {
+                    closeMobileMenu();
+                }
+            });
+        })();
+
+        // ---------- ДАННЫЕ (имитация БД) ----------
+        const members = [
+            { id: 1, name: "Антонов В.И.", plot: "12А" },
+            { id: 2, name: "Сидорова Е.П.", plot: "14" },
+            { id: 3, name: "Козлов Д.М.", plot: "21Б" },
+            { id: 4, name: "Мельник О.В.", plot: "33" }
+        ];
+
+        let readings = [
+            { memberId: 1, date: "2025-04-01", value: 12450, prevValue: 12300 },
+            { memberId: 2, date: "2025-04-01", value: 8750, prevValue: 8600 },
+            { memberId: 3, date: "2025-04-01", value: 34520, prevValue: 34300 },
+            { memberId: 4, date: "2025-04-01", value: 5600, prevValue: 5480 }
+        ];
+
+        let payments = [
+            { memberId: 1, date: "2025-04-05", amount: 45.20 },
+            { memberId: 2, date: "2025-04-06", amount: 38.50 },
+            { memberId: 3, date: "2025-04-04", amount: 62.30 },
+            { memberId: 4, date: "2025-04-07", amount: 19.00 }
+        ];
+
+        const TARIFF = 0.3341; // руб/кВт·ч
+
+        // Вспомогательные функции
+        function getMemberById(id) {
+            return members.find(m => m.id === id);
+        }
+
+        function getLastReadingForMember(memberId) {
+            const memberReadings = readings.filter(r => r.memberId === memberId);
+            if (memberReadings.length === 0) return null;
+            return memberReadings.reduce((latest, curr) => new Date(curr.date) > new Date(latest.date) ? curr : latest);
+        }
+
+        function calculateBalance(memberId) {
+            const lastReading = getLastReadingForMember(memberId);
+            if (!lastReading) return { consumption: 0, accrued: 0, paid: 0, balance: 0, hasData: false };
+            const consumption = lastReading.value - lastReading.prevValue;
+            const accrued = consumption * TARIFF;
+            const paid = payments.filter(p => p.memberId === memberId).reduce((sum, p) => sum + p.amount, 0);
+            // ИСПРАВЛЕНО: сальдо = оплачено - начислено
+            //   > 0 → переплата (оплатил больше, чем начислено)
+            //   < 0 → долг (начислено больше, чем оплачено)
+            const balance = paid - accrued;
+            return { consumption, accrued, paid, balance, hasData: true };
+        }
+
+        // ---------------- ГЛАВНАЯ (Dashboard) ----------------
+        function renderDashboard() {
+            let tableRows = '';
+            let totalDebt = 0;
+            for (const member of members) {
+                const balanceData = calculateBalance(member.id);
+                const lastReadingObj = getLastReadingForMember(member.id);
+                const lastReadingValue = lastReadingObj ? lastReadingObj.value : '—';
+                const balanceClass = balanceData.balance >= 0 ? 'overpay' : 'debt';
+                const balanceText = balanceData.balance >= 0 ? `+${balanceData.balance.toFixed(2)}` : `${balanceData.balance.toFixed(2)}`;
+                if (balanceData.balance < 0) totalDebt += Math.abs(balanceData.balance);
+                tableRows += `
+                    <tr>
+                        <td>${member.plot}</td>
+                        <td>${member.name}</td>
+                        <td>${lastReadingValue}</td>
+                        <td>${balanceData.consumption}</td>
+                        <td>${balanceData.accrued.toFixed(2)}</td>
+                        <td class="${balanceClass}">${balanceText}</td>
+                    </tr>
+                `;
+            }
+
+            return `
+                <div class="energy-card">
+                    <span class="tariff-badge">Тариф: ${TARIFF} руб/кВт·ч</span>
+                    <h2>📊 Сводка за апрель 2025</h2>
+                    <p class="info-text">⏱ Данные обновляются после внесения показаний и оплат.</p>
+                    <table class="energy-table">
+                        <thead>
+                            <tr><th>Участок</th><th>Владелец</th><th>Текущие показания</th><th>Расход, кВт·ч</th><th>Начислено, руб</th><th>Сальдо</th></tr>
+                        </thead>
+                        <tbody>${tableRows}</tbody>
+                    </table>
+                    <div class="info-text">💰 Общая задолженность по товариществу: <strong class="debt">${totalDebt.toFixed(2)} руб</strong></div>
+                </div>
+                <div class="energy-card">
+                    <h3>📌 Как это работает?</h3>
+                    <p class="info-text">
+                        • <strong>Передать показания</strong> — в разделе «Передать показания» выберите свой участок и введите текущие цифры счётчика.<br>
+                        • <strong>Узнать долг</strong> — раздел «Моя задолженность» покажет актуальное состояние.<br>
+                        • <strong>Бухгалтеру</strong> — доступны формы для внесения оплат и корректировки показаний.
+                    </p>
+                </div>
+            `;
+        }
+
+        // ---------------- ПЕРЕДАЧА ПОКАЗАНИЙ ----------------
+        function renderMeterForm() {
+            let memberOptions = '';
+            for (const member of members) {
+                memberOptions += `<option value="${member.id}">${member.plot} — ${member.name}</option>`;
+            }
+            return `
+                <div class="energy-card">
+                    <h2>📟 Передать показания электроэнергии</h2>
+                    <p class="info-text">Введите текущие показания счётчика (целое число, кВт·ч). Предыдущее значение будет взято автоматически.</p>
+                    <form id="readingForm">
+                        <div class="form-group">
+                            <label>Ваш участок</label>
+                            <select id="memberId" required>${memberOptions}</select>
+                        </div>
+                        <div class="form-group">
+                            <label>Текущие показания (кВт·ч)</label>
+                            <input type="number" id="currentValue" step="1" required placeholder="например 45678">
+                        </div>
+                        <button type="submit" class="btn-energy">✉️ Отправить показания</button>
+                    </form>
+                    <div id="readingMessage" class="info-text"></div>
+                </div>
+            `;
+        }
+
+        function handleReadingSubmit(event) {
+            event.preventDefault();
+            const memberId = parseInt(document.getElementById('memberId').value);
+            const currentValue = parseFloat(document.getElementById('currentValue').value);
+            const lastReading = getLastReadingForMember(memberId);
+            const prevValue = lastReading ? lastReading.value : 0;
+            if (currentValue <= prevValue) {
+                document.getElementById('readingMessage').innerHTML = '❌ Ошибка: текущие показания не могут быть меньше или равны предыдущим.';
+                return;
+            }
+            const newReading = {
+                memberId: memberId,
+                date: new Date().toISOString().slice(0,10),
+                value: currentValue,
+                prevValue: prevValue
+            };
+            readings.push(newReading);
+            document.getElementById('readingMessage').innerHTML = '✅ Спасибо! Ваши показания приняты. Начисления будут пересчитаны.';
+            document.getElementById('readingForm').reset();
+        }
+
+        // ---------------- ЛИЧНЫЙ БАЛАНС ----------------
+        function renderPersonalBalance() {
+            return `
+                <div class="energy-card">
+                    <h2>💰 Моя задолженность / переплата</h2>
+                    <form id="balanceForm">
+                        <div class="form-group">
+                            <label>Выберите ваш участок</label>
+                            <select id="balanceMemberId" required>
+                                ${members.map(m => `<option value="${m.id}">${m.plot} — ${m.name}</option>`).join('')}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-energy">Показать баланс</button>
+                    </form>
+                    <div id="balanceResult" class="info-text" style="margin-top:1rem;"></div>
+                </div>
+            `;
+        }
+
+        function handlePersonalBalance(event) {
+            event.preventDefault();
+            const memberId = parseInt(document.getElementById('balanceMemberId').value);
+            const member = getMemberById(memberId);
+            const balanceData = calculateBalance(memberId);
+            if (!balanceData.hasData) {
+                document.getElementById('balanceResult').innerHTML = 'Нет данных по показаниям для этого участка. Передайте показания.';
+                return;
+            }
+            const balanceClass = balanceData.balance >= 0 ? 'overpay' : 'debt';
+            const balanceText = balanceData.balance >= 0 ? `+${balanceData.balance.toFixed(2)} руб (переплата)` : `${balanceData.balance.toFixed(2)} руб (долг)`;
+            document.getElementById('balanceResult').innerHTML = `
+                <strong>${member.plot} (${member.name})</strong><br>
+                📈 Расход за период: ${balanceData.consumption} кВт·ч<br>
+                💸 Начислено: ${balanceData.accrued.toFixed(2)} руб<br>
+                🧾 Оплачено всего: ${balanceData.paid.toFixed(2)} руб<br>
+                ⚖️ Сальдо: <span class="${balanceClass}">${balanceText}</span>
+            `;
+        }
+
+        // ---------------- АДМИНКА ----------------
+        function renderAdminPanel() {
+            return `
+                <div class="energy-card">
+                    <h2>🔧 Бухгалтер / Правление</h2>
+                    <p class="info-text">Внесите оплату от участка или скорректируйте показания (для проверки).</p>
+                    <h3>➕ Добавить оплату</h3>
+                    <form id="paymentForm">
+                        <div class="form-group"><label>Участок</label><select id="paymentMemberId">${members.map(m => `<option value="${m.id}">${m.plot} — ${m.name}</option>`).join('')}</select></div>
+                        <div class="form-group"><label>Сумма оплаты (руб)</label><input type="number" step="0.01" id="paymentAmount" required></div>
+                        <div class="form-group"><label>Дата (YYYY-MM-DD)</label><input type="date" id="paymentDate" required></div>
+                        <button type="submit" class="btn-energy">Записать оплату</button>
+                    </form>
+                    <div id="paymentMessage" class="info-text"></div>
+                </div>
+                <div class="energy-card">
+                    <h3>📋 Журнал оплат (быстрый просмотр)</h3>
+                    <table class="energy-table">
+                        <thead><tr><th>Участок</th><th>Сумма</th><th>Дата</th></tr></thead>
+                        <tbody>
+                        ${payments.map(p => {
+                            const member = getMemberById(p.memberId);
+                            return `<tr><td>${member.plot}</td><td>${p.amount.toFixed(2)}</td><td>${p.date}</td></tr>`;
+                        }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function handlePaymentSubmit(event) {
+            event.preventDefault();
+            const memberId = parseInt(document.getElementById('paymentMemberId').value);
+            const amount = parseFloat(document.getElementById('paymentAmount').value);
+            const date = document.getElementById('paymentDate').value;
+            if (isNaN(amount) || !date) return;
+            payments.push({ memberId, date, amount });
+            document.getElementById('paymentMessage').innerHTML = '✅ Оплата добавлена, баланс пересчитается.';
+            document.getElementById('paymentForm').reset();
+        }
+
+        // ---------- РОУТИНГ SPA ----------
+        let currentPage = 'dashboard';
+
+        function attachEventListeners() {
+            const formReading = document.getElementById('readingForm');
+            if (formReading) formReading.addEventListener('submit', handleReadingSubmit);
+            const balanceForm = document.getElementById('balanceForm');
+            if (balanceForm) balanceForm.addEventListener('submit', handlePersonalBalance);
+            const paymentForm = document.getElementById('paymentForm');
+            if (paymentForm) paymentForm.addEventListener('submit', handlePaymentSubmit);
+        }
+
+        function renderPage(page) {
+            let content = '';
+            switch (page) {
+                case 'dashboard': content = renderDashboard(); break;
+                case 'meters': content = renderMeterForm(); break;
+                case 'balance': content = renderPersonalBalance(); break;
+                case 'admin': content = renderAdminPanel(); break;
+                default: content = renderDashboard();
+            }
+            document.getElementById('app-root').innerHTML = content;
+            attachEventListeners();
+            document.querySelectorAll('.energy-nav button').forEach(btn => {
+                if (btn.dataset.page === page) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+        }
+
+        function navigate(page) {
+            currentPage = page;
+            renderPage(page);
+            history.pushState({ page }, '', `#${page}`);
+        }
+
+        document.querySelectorAll('.energy-nav button').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const page = btn.dataset.page;
+                if (page) navigate(page);
+            });
+        });
+
+        window.addEventListener('popstate', (event) => {
+            const hash = window.location.hash.slice(1);
+            const page = ['dashboard','meters','balance','admin'].includes(hash) ? hash : 'dashboard';
+            navigate(page);
+        });
+
+        const initialHash = window.location.hash.slice(1);
+        const startPage = ['dashboard','meters','balance','admin'].includes(initialHash) ? initialHash : 'dashboard';
+        navigate(startPage);
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/st-ptich/sw.js')
+                    .then((reg) => console.log('SW зарегистрирован:', reg.scope))
+                    .catch((err) => console.log('SW ошибка:', err));
+            });
+        }
+    </script>
+</body>
+</html>
